@@ -74,8 +74,28 @@ namespace source.Student_SRC.Courses
 
         protected void Choose(object sender, EventArgs e)
         {
-            int instructorID = int.Parse(Ins.Text.ToString());
-            int courseID = int.Parse(Course.Text.ToString());
+            int instructorID = 0;
+            int courseID = 0;
+            try
+            {
+                instructorID = int.Parse(Ins.Text.ToString());
+
+            }
+            catch
+            {
+                msg.Text = "InstructorID is not valid";
+                return;
+            }
+
+            try
+            {
+                courseID = int.Parse(Course.Text.ToString());
+            }
+            catch
+            {
+                msg.Text = "courseID is not valid";
+                return;
+            }
 
             string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
             using (SqlConnection conn = new SqlConnection(connstr))

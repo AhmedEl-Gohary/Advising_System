@@ -24,7 +24,7 @@ namespace source.Advisor_SRC.Students
             }
         }
 
-        protected void Login(object sender, EventArgs e)
+        protected void OnButtonClick(object sender, EventArgs e)
         {
             string selectedValue = list.SelectedValue;
 
@@ -34,7 +34,7 @@ namespace source.Advisor_SRC.Students
             if (selectedValue == "-1")
             {
                 msg.ForeColor = System.Drawing.Color.Red;
-                msg.Text = "Please select a role.";
+                msg.Text = "You must choose a listing option";
                 return;
             }
 
@@ -52,7 +52,7 @@ namespace source.Advisor_SRC.Students
                 if (string.IsNullOrWhiteSpace(major))
                 {
                     msg.ForeColor = System.Drawing.Color.Red;
-                    msg.Text = "You must enter a major.";
+                    msg.Text = "You must enter a major";
                     return;
                 }
 

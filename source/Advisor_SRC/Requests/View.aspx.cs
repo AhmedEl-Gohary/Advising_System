@@ -24,7 +24,6 @@ namespace source.Advisor_SRC.Requests
             {
                 advisorID = 0;
             }
-
         }
 
         protected void OnButtonCLick(object sender, EventArgs e)
@@ -72,4 +71,5 @@ namespace source.Advisor_SRC.Requests
             }
         }
     }
+
 }

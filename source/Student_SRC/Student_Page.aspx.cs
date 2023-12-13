@@ -12,10 +12,10 @@ namespace source.Student_SRC
 {
     public partial class Student_Page : System.Web.UI.Page
     {
-        int studentId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session == null || Session["studentID"] == null)
+            int studentId = 0;
+            if (Session == null || Session["studentID"] == null)
             {
                 Response.Redirect("../Error_Page.aspx");
             }

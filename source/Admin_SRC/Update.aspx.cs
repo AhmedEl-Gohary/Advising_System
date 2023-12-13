@@ -31,11 +31,11 @@ namespace source.Admin_SRC
                 msg.Text = "You Should enter a Number!";
                 return;
             }
-            SqlCommand isssue = new SqlCommand("Procedure_AdminUpdateStudentStatus", conn);
-            isssue.CommandType = CommandType.StoredProcedure;
-            isssue.Parameters.Add(new SqlParameter("@student_id", id));
+            SqlCommand upd = new SqlCommand("Procedure_AdminUpdateStudentStatus", conn);
+            upd.CommandType = CommandType.StoredProcedure;
+            upd.Parameters.Add(new SqlParameter("@student_id", id));
             conn.Open();
-            isssue.ExecuteNonQuery();   
+            upd.ExecuteNonQuery();   
             conn.Close();
         }
     }

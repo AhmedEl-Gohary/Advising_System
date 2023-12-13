@@ -22,6 +22,8 @@
             <asp:ListItem Text="Students transcript" Value="9"></asp:ListItem>
             <asp:ListItem Text="Semesters along with their offered courses" Value="10"></asp:ListItem>
             </asp:DropDownList>
+            <br />
+            <br />
             <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
             <asp:Label ID="msg" runat="server" Text=" "></asp:Label>
             <asp:GridView ID="GridView1" runat="server" >

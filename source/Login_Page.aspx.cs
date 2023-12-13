@@ -66,7 +66,8 @@ namespace source
                 bool canLogin = Boolean.Parse(FN_AdvisorLogin.ExecuteScalar().ToString());
                 if (canLogin)
                 {
-                    Response.Redirect("Advisor_SRC/Advisor_Page.aspx?advisorID=" + id);
+                    Session["advisorId"] = id;
+                    Response.Redirect("Advisor_SRC/Advisor_Page.aspx");
                 }
                 else
                 {

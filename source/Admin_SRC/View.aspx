@@ -9,6 +9,24 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:DropDownList ID="list" runat="server" Width="350px" >
+            <asp:ListItem Enabled="true" Text="Select Item you want to list" Value="-1"></asp:ListItem>
+            <asp:ListItem Text="Advisors" Value="1"></asp:ListItem>
+            <asp:ListItem Text="Students with their corresponding advisors" Value="2"></asp:ListItem>
+            <asp:ListItem Text="Pending requests" Value="3"></asp:ListItem>
+            <asp:ListItem Text="Details of instructors along with their assigned courses" Value="4"></asp:ListItem>
+            <asp:ListItem Text="Semesters along with their offered courses" Value="5"></asp:ListItem>
+            <asp:ListItem Text="Payments along with their corresponding students" Value="6"></asp:ListItem>
+            <asp:ListItem Text="Active students" Value="7"></asp:ListItem>
+            <asp:ListItem Text="Graduation plans along with their initiated advisors" Value="8"></asp:ListItem>
+            <asp:ListItem Text="Students transcript" Value="9"></asp:ListItem>
+            <asp:ListItem Text="Semesters along with their offered courses" Value="10"></asp:ListItem>
+            </asp:DropDownList>
+            <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
+            <asp:Label ID="msg" runat="server" Text=" "></asp:Label>
+            <asp:GridView ID="GridView1" runat="server" >
+            </asp:GridView>
+            
         </div>
     </form>
 </body>

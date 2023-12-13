@@ -23,13 +23,11 @@
             <asp:ListItem Text="Semesters along with their offered courses" Value="10"></asp:ListItem>
             </asp:DropDownList>
 
-
-            <br />
-            <br />
-
+           <br />
 
             <asp:Button ID="Button1" runat="server" Text="list" OnClick="Button1_Click" Width="81px" />
             <br />
+
             <asp:Label ID="msg" runat="server" Text=" "></asp:Label>
             <asp:GridView ID="GridView1" runat="server" >
             </asp:GridView>

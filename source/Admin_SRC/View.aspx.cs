@@ -19,13 +19,13 @@ namespace source.Admin_SRC
         private void BindGridView(string type, string name)
         {
             string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
-            string query ;
+            string query;
             if (type == "View")
             {
                 // For views
                 query = $"SELECT * FROM {name}";
             }
-            else 
+            else
             {
                 // For stored procedures
                 query = $"EXEC {name}";
@@ -66,12 +66,12 @@ namespace source.Admin_SRC
                 case "10":
                     return ("View", "Semster_offered_Courses");
                 default:
-                    return ("","");
+                    return ("", "");
             }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
-		{
+        {
             string selectedValue = list.SelectedValue;
             string type, name;
             (type, name) = GetViewName(selectedValue);
@@ -84,5 +84,5 @@ namespace source.Admin_SRC
             msg.Text = " ";
             BindGridView(type, name);
         }
-	}
+    }
 }

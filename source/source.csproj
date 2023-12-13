@@ -83,6 +83,7 @@
     <Content Include="Advisor_SRC\Advisor_Register_Page.aspx" />
     <Content Include="Advisor_SRC\Requests\View.aspx" />
     <Content Include="Advisor_SRC\Students\View.aspx" />
+    <Content Include="DB_M2_Solution --Upload.sql" />
     <Content Include="Error_Page.aspx" />
     <Content Include="Login_Page.aspx" />
     <Content Include="Registeration_Page.aspx" />

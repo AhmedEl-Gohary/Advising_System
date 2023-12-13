@@ -97,7 +97,6 @@
     <Content Include="Student_SRC\Requests\Send.aspx" />
     <Content Include="Student_SRC\Student_Page.aspx" />
     <Content Include="Student_SRC\Student_Register_Page.aspx" />
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin_SRC\Add.aspx.cs">
@@ -307,6 +306,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

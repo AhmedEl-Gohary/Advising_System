@@ -110,5 +110,10 @@ namespace source.Admin_SRC
                 }
             }
         }
+
+        protected void back(object sender, EventArgs e)
+        {
+            Response.Redirect("Admin_Page.aspx");
+        }
     }
 }

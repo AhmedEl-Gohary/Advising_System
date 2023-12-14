@@ -8,6 +8,9 @@
 </head>
 <body>
         <form id="form1" runat="server">
+            <asp:Button ID="Button2" runat="server" OnClick ="back" Text="Back" />
+            <br />
+            <br />
         <asp:Label ID="label1" runat="server" Text="Please enter Student_ID"></asp:Label>
         <br />
         <br />

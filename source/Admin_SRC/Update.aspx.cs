@@ -38,5 +38,10 @@ namespace source.Admin_SRC
             upd.ExecuteNonQuery();   
             conn.Close();
         }
+
+        protected void back(object sender, EventArgs e)
+        {
+            Response.Redirect("Admin_Page.aspx");
+        }
     }
 }

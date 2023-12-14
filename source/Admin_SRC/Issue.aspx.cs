@@ -48,5 +48,10 @@ namespace source.Admin_SRC
             msg.Text = "";
             conn.Close();
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Admin_Page.aspx");
+        }
     }
 }

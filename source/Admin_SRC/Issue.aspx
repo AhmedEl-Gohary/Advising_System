@@ -9,6 +9,8 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Back" />
+            <br />
         </div>
         <asp:Label ID="label1" runat="server" Text="Please enter Payment_ID"></asp:Label>
         <br />

@@ -13,6 +13,8 @@ namespace source.Student_SRC.Courses
     public partial class Instructor : System.Web.UI.Page
     {
         int studentId = 0;
+        int instructorID = 0;
+        int courseID = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session == null || Session["studentID"] == null)
@@ -23,33 +25,16 @@ namespace source.Student_SRC.Courses
             {
                 studentId = int.Parse(Session["studentID"].ToString());
             }
+            msg.Text = " ";
         }
 
-        protected void Show(object sender, EventArgs e)
+        protected void Choose(object sender, EventArgs e)
         {
-            msg.Text = " ";
-            int instructorID = 0;
-            int courseID = 0;
+            if (!Input_Handle())
+            {
+                return;
+            }
             string currSemCode = semCode.Text.ToString();
-            try
-            {
-                instructorID = int.Parse(Ins.Text.ToString());
-            }
-            catch 
-            {
-                msg.Text = "InstructorID is not valid";
-                return;
-            }
-            
-            try
-            {
-                courseID = int.Parse(Course.Text.ToString());
-            }
-            catch
-            {
-                msg.Text = "courseID is not valid";
-                return;
-            }
 
             DataTable dataTable = new DataTable();
             GridView1.DataSource = dataTable;
@@ -72,28 +57,11 @@ namespace source.Student_SRC.Courses
             }
         }
 
-        protected void Choose(object sender, EventArgs e)
+        protected void Show(object sender, EventArgs e)
         {
-            int instructorID = 0;
-            int courseID = 0;
-            try
+            msg.Text = " ";
+            if (!Input_Handle())
             {
-                instructorID = int.Parse(Ins.Text.ToString());
-
-            }
-            catch
-            {
-                msg.Text = "InstructorID is not valid";
-                return;
-            }
-
-            try
-            {
-                courseID = int.Parse(Course.Text.ToString());
-            }
-            catch
-            {
-                msg.Text = "courseID is not valid";
                 return;
             }
 
@@ -108,8 +76,48 @@ namespace source.Student_SRC.Courses
                 adapter.Fill(dataTable);
                 GridView1.DataSource = dataTable;
                 GridView1.DataBind();
+                if (dataTable.Rows.Count == 0)
+                {
+                    msg.Text = $"There Are no Slots that are taught by Instructor: {instructorID}";
+                }
                 conn.Close();
             }
+        }
+
+        protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            int selectValue = int.Parse(DropDownList1.SelectedValue);
+            bool visiblity = selectValue != 1;
+            Button2.Visible = visiblity;
+            semCode.Visible = visiblity;
+            Label3.Visible = visiblity;
+            Button1.Visible = !visiblity;
+        }
+
+        private bool Input_Handle()
+        {
+            try
+            {
+                instructorID = int.Parse(Ins.Text.ToString());
+
+            }
+            catch
+            {
+                msg.Text = "InstructorID should be a Number!";
+                return false;
+            }
+
+            try
+            {
+                courseID = int.Parse(Course.Text.ToString());
+            }
+            catch
+            {
+                msg.Text = "courseID should be a Number!";
+                return false;
+            }
+            msg.Text = " ";
+            return true;
         }
     }
 }

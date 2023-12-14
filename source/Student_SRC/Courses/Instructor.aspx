@@ -9,6 +9,14 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Label ID="Label4" runat="server" Text="Please select your Action"></asp:Label>
+            <br />
+            <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged1" AutoPostBack="True">
+                <asp:ListItem Value="1">Show</asp:ListItem>
+                <asp:ListItem Value="2">Choose</asp:ListItem>
+            </asp:DropDownList>
+            <br />
+            <br />
             <asp:Label ID="Label1" runat="server" Text="InstructorID"></asp:Label>
             <br />
             <asp:TextBox ID="Ins" runat="server"></asp:TextBox>
@@ -19,14 +27,13 @@
             <asp:TextBox ID="Course" runat="server"></asp:TextBox>
             <br />
             <br />
-            <asp:Label ID="Label3" runat="server" Text="Current Semester Code"></asp:Label>
+            <asp:Label ID="Label3" runat="server" Text="Current Semester Code" Visible="False"></asp:Label>
             <br />
-            <asp:TextBox ID="semCode" runat="server"></asp:TextBox>
-            <br />
+            <asp:TextBox ID="semCode" runat="server" Visible="False"></asp:TextBox>
             <br />
             <asp:Button ID="Button1" runat="server" Text="Show" OnClick="Show" />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="Button2" runat="server" Text="Choose" OnClick="Choose" />
+            <br />
+            <asp:Button ID="Button2" runat="server" Text="Choose" OnClick="Choose" Visible="False" />
             <br />
             <br />
             <asp:GridView ID="GridView1" runat="server">

@@ -8,8 +8,29 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-        </div>
+         <div>        
+             <asp:Button ID="Button1" runat="server" Text="Go Back" OnClick ="back" Width="79px" />
+             <br />
+             <br />
+        <asp:DropDownList ID="itemType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="itemType_SelectedIndexChanged" Width="253px">
+        <asp:ListItem Text="Select Item to Delete" Value="balabizo" />
+        <asp:ListItem Text="Course" Value="Course" />
+        <asp:ListItem Text="Slot" Value="Slots in Certain Semster" />
+        </asp:DropDownList>
+
+ 
+             <br />
+
+ 
+ <div id="dynamicFields" runat="server">
+     <br />
+             </div>
+ <asp:Button ID="submitButton" runat="server" Text="Submit" OnClientClick="return submitForm();" OnClick="submitButton_Click" />
+
+  <br />
+ <asp:Label ID="msg" runat="server" Text=" " ForeColor="Red"></asp:Label>
+ <br />
+ </div>
     </form>
 </body>
 </html>

@@ -7,9 +7,19 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
+        <form id="form1" runat="server">
+            <asp:Button ID="Button2" runat="server" OnClick ="back" Text="Go Back" />
+            <br />
+            <br />
+        <asp:Label ID="label1" runat="server" Text="Please enter Student_ID"></asp:Label>
+        <br />
+        <br />
+        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="Button1" runat="server" OnClick="Enter" Text="Update" Width="110px" />
+        <br />
+        <asp:Label ID="msg" runat="server" Text=" " ForeColor="Red"></asp:Label>
+        <br />
     </form>
 </body>
 </html>

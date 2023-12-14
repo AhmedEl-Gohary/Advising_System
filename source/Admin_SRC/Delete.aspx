@@ -9,13 +9,13 @@
 <body>
     <form id="form1" runat="server">
          <div>        
-             <asp:Button ID="Button1" runat="server" Text="Back" OnClick ="back" Width="79px" />
+             <asp:Button ID="Button1" runat="server" Text="Go Back" OnClick ="back" Width="79px" />
              <br />
              <br />
         <asp:DropDownList ID="itemType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="itemType_SelectedIndexChanged" Width="253px">
         <asp:ListItem Text="Select Item to Delete" Value="balabizo" />
         <asp:ListItem Text="Course" Value="Course" />
-        <asp:ListItem Text="Slot" Value="Slot" />
+        <asp:ListItem Text="Slot" Value="Slots in Certain Semster" />
         </asp:DropDownList>
 
  

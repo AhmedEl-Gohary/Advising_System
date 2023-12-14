@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using source.Student_SRC.Courses;
 
 namespace source.Student_SRC.Makeup_Exams
 {
@@ -34,17 +35,28 @@ namespace source.Student_SRC.Makeup_Exams
                 return;
             }
             int courseId = 0;
+            string semestercode = semesterCode.Text.ToString();
             try
             {
                 courseId = int.Parse(courseID.Text.ToString());
             }
             catch
             {
-                msg.Text = "not Valid CourseID";
+                msg.Text = "not a Valid CourseID";
                 return;
             }
-            string semestercode = semesterCode.Text.ToString();
 
+            if(!Existence_Check <int> ("Course" , "course_id" , courseId))
+            {
+                msg.Text = "not a Valid CourseID";
+                return;
+            }
+            if (!Existence_Check <string> ("Semester" , "semester_code" , semestercode))
+            {
+                msg.Text = "not a Valid SemesterCode";
+                return;
+            }
+            int countPrev = Count_Rows("Exam_Student");
             string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
             using (SqlConnection conn = new SqlConnection(connstr))
             {
@@ -56,25 +68,61 @@ namespace source.Student_SRC.Makeup_Exams
                 proc.Parameters.AddWithValue("@StudentID",studentID);
                 proc.Parameters.AddWithValue("@courseID", courseId);
                 proc.Parameters.AddWithValue("@studentCurr_sem", semestercode);
-                proc.ExecuteNonQuery();
-                SqlDataAdapter adapter = new SqlDataAdapter(
-                    $"SELECT * from Student_Instructor_Course_Take WHERE " +
-                    $"student_id = {studentID} AND course_id = {courseId} AND " +
-                    $"semester_code = \'{semestercode}\' AND exam_type = \'{type}_Makeup\' " +
-                    $"AND grade IS NULL"
-                    , conn);
-                DataTable dataTable = new DataTable();
-                adapter.Fill(dataTable);
-                if(dataTable.Rows.Count > 0)
+
+                try { proc.ExecuteNonQuery(); } catch (SqlException sqlException)
                 {
-                    msg.Text = "You have Registered Successfully!";
-                }
-                else
-                {
-                    msg.Text = "Registeration Failed!";
+                    msg.Text = "You have Already Regitered for an Exam before!";
+                    return;
                 }
                 conn.Close();
             }
+            int countAfter = Count_Rows("Exam_Student");
+            if(countAfter > countPrev)
+            {
+                msg.Text = "Registered successfully!";
+            }
+            else
+            {
+                msg.Text = "You can't register for a Makeup Exam! it is either that you don't" +
+                    " take the course currently or you already succeeded!";
+            }
         }
+
+        private bool Existence_Check <T> (string table , string column ,  T columnValue) 
+        {
+            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string query = $"SELECT * from {table} WHERE {column} = \'{columnValue}\'";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                if (dataTable.Rows.Count == 0)
+                {
+                    return false;
+                }
+                conn.Close();
+            }
+            return true;
+        }
+
+        private int Count_Rows (string table)
+        {
+            int count = 0;
+            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string query = $"SELECT * from {table}";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                count = dataTable.Rows.Count;
+                conn.Close();
+            }
+            return count;
+        }
+
     }
 }

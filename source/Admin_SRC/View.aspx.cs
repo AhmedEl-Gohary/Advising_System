@@ -63,8 +63,6 @@ namespace source.Admin_SRC
                     return ("View", "Advisors_Graduation_Plan");
                 case "9":
                     return ("View", "Students_Courses_transcript");
-                case "10":
-                    return ("View", "Semster_offered_Courses");
                 default:
                     return ("","");
             }
@@ -84,5 +82,10 @@ namespace source.Admin_SRC
             msg.Text = " ";
             BindGridView(type, name);
         }
+
+		protected void Button2_Click(object sender, EventArgs e)
+		{
+			Response.Redirect("Admin_Page.aspx");
+		}
 	}
 }

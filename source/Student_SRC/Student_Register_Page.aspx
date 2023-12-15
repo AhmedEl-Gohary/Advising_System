@@ -107,6 +107,15 @@
             color: #4caf50;
             font-size: 16px;
         }
+
+        #eyeIcon {
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -137,8 +146,23 @@
             <asp:TextBox ID="email" runat="server" TextMode="Email" placeholder="Enter your email"></asp:TextBox>
             <br />
             <label for="password">Password:</label>
-            <asp:TextBox ID="password" runat="server" TextMode="Password" placeholder="Enter your password"></asp:TextBox>
-            <br />
+            <div style="position: relative;">
+                <asp:TextBox ID="password" runat="server" TextMode="Password" placeholder="Enter your password"></asp:TextBox>
+                <span id="eyeIcon" class="eye-icon" onclick="togglePassword()">🔒</span>
+            </div>
+            <script>
+                function togglePassword() {
+                    var passwordInput = document.getElementById('password');
+                    var eyeIcon = document.getElementById('eyeIcon');
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        eyeIcon.textContent = '👁️';
+                    } else {
+                        passwordInput.type = 'password';
+                        eyeIcon.textContent = '🔒';
+                    }
+                }
+            </script>
             <asp:Label ID="msg" runat="server" Text=" " ForeColor="Red"></asp:Label>
             <br />
             <asp:Button ID="register" OnClick="Register" runat="server" Text="Register" />

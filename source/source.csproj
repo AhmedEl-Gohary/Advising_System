@@ -69,9 +69,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="Admin_SRC\Add.aspx" />
-    <Content Include="..\..\..\Users\ahmed\OneDrive\Pictures\Admin_Page.aspx">
-      <Link>Admin_SRC\Admin_Page.aspx</Link>
-    </Content>
+    <Content Include="Admin_SRC\Admin_Page.aspx" />
     <Content Include="Admin_SRC\Delete.aspx" />
     <Content Include="Admin_SRC\Issue.aspx" />
     <Content Include="Admin_SRC\Link.aspx" />
@@ -109,14 +107,12 @@
     <Compile Include="Admin_SRC\Add.aspx.designer.cs">
       <DependentUpon>Add.aspx</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Users\ahmed\OneDrive\Pictures\Admin_Page.aspx.cs">
+    <Compile Include="Admin_SRC\Admin_Page.aspx.cs">
       <DependentUpon>Admin_Page.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-      <Link>Admin_SRC\Admin_Page.aspx.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\Users\ahmed\OneDrive\Pictures\Admin_Page.aspx.designer.cs">
+    <Compile Include="Admin_SRC\Admin_Page.aspx.designer.cs">
       <DependentUpon>Admin_Page.aspx</DependentUpon>
-      <Link>Admin_SRC\Admin_Page.aspx.designer.cs</Link>
     </Compile>
     <Compile Include="Admin_SRC\Delete.aspx.cs">
       <DependentUpon>Delete.aspx</DependentUpon>
@@ -310,6 +306,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".editorconfig" />
     <None Include="packages.config" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">

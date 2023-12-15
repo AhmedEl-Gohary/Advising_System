@@ -27,6 +27,10 @@ namespace source.Student_SRC.Courses
             string selectedValue = List.SelectedValue;
             SemesterCode.Enabled = !(selectedValue == "-1" 
                 || selectedValue == "1" || selectedValue == "5");
+            if (!SemesterCode.Enabled)
+            {
+                SemesterCode.Text = "";
+            }
             msg.Text = " ";
         }
 

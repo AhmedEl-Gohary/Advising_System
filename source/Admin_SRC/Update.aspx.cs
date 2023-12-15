@@ -36,9 +36,37 @@ namespace source.Admin_SRC
             upd.Parameters.Add(new SqlParameter("@student_id", id));
             conn.Open();
             upd.ExecuteNonQuery();   
+            if (Existence_Check("Student" ,"student_id", id))
+            {
+                msg.Text = "Financial Status Updated Successfully";
+                msg.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                msg.Text = "Student ID id not Valid";
+                msg.ForeColor = System.Drawing.Color.Red;
+            }
+        
             conn.Close();
         }
-
+        private bool Existence_Check<T>(string table, string column, T columnValue)
+        {
+            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string query = $"SELECT * from {table} WHERE {column} = \'{columnValue}\'";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                if (dataTable.Rows.Count == 0)
+                {
+                    return false;
+                }
+                conn.Close();
+            }
+            return true;
+        }
         protected void back(object sender, EventArgs e)
         {
             Response.Redirect("Admin_Page.aspx");

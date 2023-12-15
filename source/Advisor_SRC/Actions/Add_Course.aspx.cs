@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.DynamicData;
@@ -40,10 +43,46 @@ namespace source.Advisor_SRC.Actions
                     string semesterCode = Request.Form["Semester Code"];
                     string courseName = Request.Form["Course Name"];
 
-                    InsertCourseData(studentID, semesterCode, courseName);
+                    string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+                    string query = $"SELECT COUNT(*) FROM Student WHERE student_id = {studentID} AND advisor_id = {advisorId}";
+                    int count = 0;
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            count = (int) command.ExecuteScalar();
+                        }
+                    }
+                    bool notMyStudent = (count == 0);
 
-                    msg.Text = "Adding Course was successful!";
-                    msg.ForeColor = System.Drawing.Color.Green;
+                    if (notMyStudent)
+                    {
+                        msg.Text = "This student is not one of your assigned students";
+                        msg.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (!Existence_Check<int>("Student", "student_id", studentID)) {
+                        msg.Text = "Student id doesn't exist";
+                        msg.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (!Existence_Check<string>("Semester", "semester_code", semesterCode))
+                    {
+                        msg.Text = "Semester Code doesn't exist";
+                        msg.ForeColor = System.Drawing.Color.Red;
+
+                    }
+                    else if (!Existence_Check<string>("Course", "name", courseName))
+                    {
+                        msg.Text = "Course name doesn't exist";
+                        msg.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else
+                    {
+                        InsertCourseData(studentID, semesterCode, courseName);
+
+                        msg.Text = "Adding Course was successful!";
+                        msg.ForeColor = System.Drawing.Color.Green;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -58,16 +97,61 @@ namespace source.Advisor_SRC.Actions
                     string semesterCode = Request.Form["Semester Code"];
                     DateTime expectedGraduationDate = DateTime.Parse(Request.Form["Expected Graduation Date"]);
                     int semCreditHours = int.Parse(Request.Form["Semester Credit Hours"]);
-                    int advisorID = int.Parse(Request.Form["Advisor ID"]);
                     int studentID = int.Parse(Request.Form["Student ID"]);
 
-                    InsertGraduationPlanData(semesterCode, expectedGraduationDate, semCreditHours,
-                                                                        advisorID, studentID);
 
+                    string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+                    string query = $"SELECT COUNT(*) FROM Student WHERE student_id = {studentID} AND advisor_id = {advisorId}";
+                    int count = 0;
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            count = (int)command.ExecuteScalar();
+                        }
+                    }
+                    bool notMyStudent = (count == 0);
 
+                    query = $"SELECT COUNT(*) FROM Graduation_Plan WHERE student_id = {studentID} AND advisor_id = {advisorId} AND course";
+                    count = 0;
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            count = (int) command.ExecuteScalar();
+                        }
+                    }
+                    bool alreadyCreated = (count != 0);
 
-                    msg.Text = "Graduation Plan was added successful!";
-                    msg.ForeColor = System.Drawing.Color.Green;
+                    if (notMyStudent)
+                    {
+                        msg.Text = "This student is not one of your assigned students";
+                        msg.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (alreadyCreated)
+                    {
+                        msg.Text = "A graduation plan alrady exists for this student";
+                        msg.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (!Existence_Check<int>("Student", "student_id", studentID))
+                    {
+                        msg.Text = "Student id doesn't exist";
+                        msg.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (!Existence_Check<string>("Semester", "semester_code", semesterCode))
+                    {
+                        msg.Text = "Semester Code doesn't exist";
+                        msg.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else
+                    {
+                        InsertGraduationPlanData(semesterCode, expectedGraduationDate, semCreditHours,
+                                                                       advisorId, studentID);
+                        msg.Text = "Graduation plan was successful";
+                        msg.ForeColor = System.Drawing.Color.Green;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -82,10 +166,35 @@ namespace source.Advisor_SRC.Actions
                     DateTime expectedGradDate = DateTime.Parse(Request.Form["Expected Graduation Date"]);
                     int studentID = int.Parse(Request.Form["Student ID"]);
 
-                    UpdateGraduationPlanData(expectedGradDate, studentID);
+                    string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+                    string query = $"SELECT COUNT(*) FROM Student WHERE student_id = {studentID} AND advisor_id = {advisorId}";
+                    int count = 0;
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            count = (int)command.ExecuteScalar();
+                        }
+                    }
+                    bool notMyStudent = (count == 0);
 
-                    msg.Text = "Update Graduation Plan was successful!";
-                    msg.ForeColor = System.Drawing.Color.Green;
+                    if (notMyStudent)
+                    {
+                        msg.Text = "This student is not one of your assigned students";
+                        msg.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (!Existence_Check<int>("Student", "student_id", studentID))
+                    {
+                        msg.Text = "Student id doesn't exist";
+                        msg.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else
+                    {
+                        UpdateGraduationPlanData(expectedGradDate, studentID);
+                        msg.Text = "Updating Graduation Plan was successful!";
+                        msg.ForeColor = System.Drawing.Color.Green;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -95,6 +204,8 @@ namespace source.Advisor_SRC.Actions
             }
             UpdateForm();
         }
+
+       
 
 
         protected void itemType_SelectedIndexChanged(object sender, EventArgs e)
@@ -118,7 +229,6 @@ namespace source.Advisor_SRC.Actions
                 AddInputField("Semester Code");
                 AddInputField("Expected Graduation Date");
                 AddInputField("Semester Credit Hours");
-                AddInputField("Advisor ID");
                 AddInputField("Student ID");
             }
             else if (itemTypeValue == "updateGraduationPlan")
@@ -235,5 +345,26 @@ namespace source.Advisor_SRC.Actions
             }
             UpdateForm();
         }
+
+        private bool Existence_Check<T>(string table, string column, T columnValue)
+        {
+            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string query = $"SELECT * from {table} WHERE {column} = \'{columnValue}\'";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                if (dataTable.Rows.Count == 0)
+                {
+                    return false;
+                }
+                conn.Close();
+            }
+            return true;
+        }
     }
+
+
 }

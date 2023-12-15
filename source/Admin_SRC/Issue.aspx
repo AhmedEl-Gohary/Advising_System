@@ -20,6 +20,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="Button1" runat="server" OnClick="Enter" Text="Enter" Width="110px" />
         <br />
+        <br />
         <asp:Label ID="msg" runat="server" Text=" " ForeColor="Red"></asp:Label>
         <br />
     </form>

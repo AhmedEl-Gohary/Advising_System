@@ -721,7 +721,7 @@ select @requestCreditHours = Request.credit_hours from Request where Request.req
 select @type = Request.type from Request where Request.request_id = @requestID
 set @new_studentCH = @studentCH
 
-if @type like '%credit%' and @studentCH + @requestCreditHours<=34 and @studentGPA < 3.7 and @requestCreditHours<=3
+if @type like '%credit%' and @studentCH + @requestCreditHours <= 34 and @studentGPA < 3.7 and @requestCreditHours <= 3
 Begin
 set @stat = 'Accept' 
 set @new_studentCH = @studentCH + @requestCreditHours

@@ -13,5 +13,10 @@ namespace source.Student_SRC.Main
         {
 
         }
+
+        protected void Add_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

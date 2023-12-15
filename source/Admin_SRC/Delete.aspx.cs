@@ -83,12 +83,12 @@ namespace source.Admin_SRC
                 int newcnt = Count_Rows("Course");
                 if (oldcnt == newcnt)
                 {
-                    msg.Text = "Slot ID does not exist!";
+                    msg.Text = "No slots were deleted! this semester do not have slots assigned to unoffered courses.";
                     msg.ForeColor = System.Drawing.Color.Red;
                 }
                 else
                 {
-                    msg.Text = "Slot deleted Successfully";
+                    msg.Text = "Slots deleted Successfully";
                     msg.ForeColor = System.Drawing.Color.Green;
                 }
                 UpdateForm();

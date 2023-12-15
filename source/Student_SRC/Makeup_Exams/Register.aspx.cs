@@ -18,7 +18,7 @@ namespace source.Student_SRC.Makeup_Exams
         {
             if (Session == null || Session["studentID"] == null)
             {
-                Response.Redirect("../Error_Page.aspx");
+                Response.Redirect("../../Error_Page.aspx");
             }
             else
             {
@@ -124,5 +124,9 @@ namespace source.Student_SRC.Makeup_Exams
             return count;
         }
 
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Student_Page.aspx");
+        }
     }
 }

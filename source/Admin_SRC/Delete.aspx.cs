@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,22 @@ namespace source.Admin_SRC
         {
 
         }
+        public int Count_Rows(string table)
+        {
+            int count = 0;
+            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string query = $"SELECT * from {table}";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                count = dataTable.Rows.Count;
+                conn.Close();
+            }
+            return count;
+        }
         protected void submitButton_Click(object sender, EventArgs e)
         {
             string itemTypeValue = itemType.SelectedValue;
@@ -23,6 +40,7 @@ namespace source.Admin_SRC
                 msg.Text = "Please select an Item !";
                 return;
             }
+            UpdateForm();
 
             msg.Text = " ";
             if (itemTypeValue == "Course")
@@ -35,17 +53,42 @@ namespace source.Admin_SRC
                 catch
                 {
                     msg.Text = "Invalid Course ID";
+                    UpdateForm();
                     return;
                 }
-
-
                 msg.Text = " ";
+                int oldcnt = Count_Rows("Course");
                 DeleteCourse(Course_Id);
+                int newcnt = Count_Rows("Course");
+                if (oldcnt == newcnt)
+                {
+                    msg.Text = "Course Already Deleted";
+                    msg.ForeColor = System.Drawing.Color.Red;
+                }
+                else
+                {
+                    msg.Text = "Course deleted Successfully";
+                    msg.ForeColor = System.Drawing.Color.Green;
+                }
+                UpdateForm();
             }
             else 
             {
                 string Semster_code = Request.Form["Current Semster Code"];
+                int oldcnt = Count_Rows("Slot");
                 DeleteSlot(Semster_code);
+                int newcnt = Count_Rows("Course");
+                if (oldcnt == newcnt)
+                {
+                    msg.Text = "Slot Already Deleted";
+                    msg.ForeColor = System.Drawing.Color.Red;
+                }
+                else
+                {
+                    msg.Text = "Slot deleted Successfully";
+                    msg.ForeColor = System.Drawing.Color.Green;
+                }
+                UpdateForm();
 
             }
         }
@@ -110,7 +153,7 @@ namespace source.Admin_SRC
                 }
             }
         }
-
+       
         protected void back(object sender, EventArgs e)
         {
             Response.Redirect("Admin_Page.aspx");

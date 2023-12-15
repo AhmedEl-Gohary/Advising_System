@@ -212,8 +212,8 @@ from Payment Inner join Student on Payment.student_id = Student.student_id
 go
 CREATE  VIEW  Courses_Slots_Instructor AS
 Select Course.course_id as CourseID , Course.name As Course, Slot.*, Instructor.name as Instructor
-from Course inner join Slot on Course.course_id = Slot.course_id
-inner join Instructor on Slot.instructor_id = Instructor.instructor_id
+from Course left outer join Slot on Course.course_id = Slot.course_id
+left outer join Instructor on Slot.instructor_id = Instructor.instructor_id
 
 go
 ----------------------all courses along with their exams’ details-----------------------------------------------------------------

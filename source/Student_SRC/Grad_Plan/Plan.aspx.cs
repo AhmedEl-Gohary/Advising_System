@@ -17,7 +17,7 @@ namespace source.Student_SRC.Grad_Plan
         {
             if (Session == null || Session["studentID"] == null)
             {
-                Response.Redirect("../Error_Page.aspx");
+                Response.Redirect("../../Error_Page.aspx");
             }
             else
             {

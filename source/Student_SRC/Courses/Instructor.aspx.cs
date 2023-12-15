@@ -19,7 +19,7 @@ namespace source.Student_SRC.Courses
         {
             if (Session == null || Session["studentID"] == null)
             {
-                Response.Redirect("../Error_Page.aspx");
+                Response.Redirect("../../Error_Page.aspx");
             }
             else
             {
@@ -116,7 +116,36 @@ namespace source.Student_SRC.Courses
                 msg.Text = "courseID should be a Number!";
                 return false;
             }
+            if(!Existence_Check<int> ("Instructor" , "instructor_id" , instructorID))
+            {
+                msg.Text = "There is no Instructor with that given ID! Please check the ID and try again";
+                return false;
+            }
+            if(!Existence_Check<int> ("Course" , "course_id" , courseID))
+            {
+                msg.Text = "There is no Course with that given ID! Please check the ID and try again";
+                return false;
+            }
             msg.Text = " ";
+            return true;
+        }
+
+        private bool Existence_Check<T>(string table, string column, T columnValue)
+        {
+            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string query = $"SELECT * from {table} WHERE {column} = \'{columnValue}\'";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                if (dataTable.Rows.Count == 0)
+                {
+                    return false;
+                }
+                conn.Close();
+            }
             return true;
         }
     }

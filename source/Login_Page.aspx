@@ -80,6 +80,10 @@
             color: #333;
             font-size: 16px;
         }
+
+        #eyeIcon:hover {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>

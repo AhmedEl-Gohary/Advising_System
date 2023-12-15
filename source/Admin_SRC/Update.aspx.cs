@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace source.Admin_SRC
 {
@@ -19,35 +20,40 @@ namespace source.Admin_SRC
 
         protected void Enter(object sender, EventArgs e)
         {
-            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
-            SqlConnection conn = new SqlConnection(connstr);
             int id;
             try
             {
                 id = int.Parse(TextBox1.Text);
+                if (id < 1)
+                    throw new InvalidDataException();
             }
             catch
             {
-                msg.Text = "You Should enter a Number!";
+                msg.Text = "You Should enter a positive integer!";
                 return;
             }
-            SqlCommand upd = new SqlCommand("Procedure_AdminUpdateStudentStatus", conn);
-            upd.CommandType = CommandType.StoredProcedure;
-            upd.Parameters.Add(new SqlParameter("@student_id", id));
-            conn.Open();
-            upd.ExecuteNonQuery();   
-            if (Existence_Check("Student" ,"student_id", id))
+            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection conn = new SqlConnection(connstr))
             {
-                msg.Text = "Financial Status Updated Successfully";
-                msg.ForeColor = System.Drawing.Color.Green;
-            }
-            else
-            {
-                msg.Text = "Student ID id not Valid";
-                msg.ForeColor = System.Drawing.Color.Red;
-            }
-        
-            conn.Close();
+				conn.Open();
+				using (SqlCommand upd = new SqlCommand("Procedure_AdminUpdateStudentStatus", conn))
+                {
+					upd.CommandType = CommandType.StoredProcedure;
+					upd.Parameters.AddWithValue("@student_id", id);
+					upd.ExecuteNonQuery();
+					if (Existence_Check("Student", "student_id", id))
+					{
+						msg.Text = "Financial Status Updated Successfully";
+						msg.ForeColor = System.Drawing.Color.Green;
+					}
+					else
+					{
+						msg.Text = "Student Id not valid! ID does not exist.";
+						msg.ForeColor = System.Drawing.Color.Red;
+					}
+				}
+			}
+               
         }
         private bool Existence_Check<T>(string table, string column, T columnValue)
         {

@@ -70,7 +70,6 @@ namespace source.Student_SRC.Courses
                 DataTable dataTable = new DataTable();
                 connection.Open();
                 adapter.Fill(dataTable);
-                connection.Close();
                 GridView1.DataSource = dataTable;
                 GridView1.DataBind();
             }

@@ -88,7 +88,6 @@ namespace source.Student_SRC.Requests
                     msg.Text = "Error Sending Request!";
                     msg.ForeColor = System.Drawing.Color.Red;
                 }
-                connection.Close();
             }
             Load_Requests(type);
         }
@@ -128,7 +127,6 @@ namespace source.Student_SRC.Requests
                 DataTable dataTable = new DataTable();
                 connection.Open();
                 adapter.Fill(dataTable);
-                connection.Close();
                 Requests.DataSource = dataTable;
                 Requests.DataBind();
             }

@@ -37,7 +37,7 @@
             <br />
             <asp:Label ID="Label11" runat="server" Text="Email"></asp:Label>
             <br />
-            <asp:TextBox ID="email" runat="server"></asp:TextBox>
+            <asp:TextBox ID="email" runat="server" TextMode="Email"></asp:TextBox>
             <br />
             <br />
             <asp:Label ID="Label4" runat="server" Text="Password"></asp:Label>

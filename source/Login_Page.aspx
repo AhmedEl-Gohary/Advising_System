@@ -95,6 +95,20 @@
             <label for="password">Password:</label>
             <br />
             <asp:TextBox ID="password" runat="server" TextMode="Password"></asp:TextBox>
+            <span id="eyeIcon" class="eye-icon" onclick="togglePassword()">🔒</span>
+            <script>
+                function togglePassword() {
+                    var passwordInput = document.getElementById('password');
+                    var eyeIcon = document.getElementById('eyeIcon');
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        eyeIcon.textContent = '👁️';
+                    } else {
+                        passwordInput.type = 'password';
+                        eyeIcon.textContent = '🔒';
+                    }
+                }
+            </script>
             <br />
             <br />
             <asp:DropDownList ID="list" runat="server" Width="250px">

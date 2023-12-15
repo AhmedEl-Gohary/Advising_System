@@ -9,6 +9,9 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Button ID="Button2" runat="server" Text="Go Back" OnClick="Button2_Click" />
+            <br />
+            <br />
             <asp:Label ID="Label1" runat="server" Text="Register for a Makeup Exam"></asp:Label>
             <br />
             <br />

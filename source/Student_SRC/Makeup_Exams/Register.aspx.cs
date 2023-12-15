@@ -124,5 +124,9 @@ namespace source.Student_SRC.Makeup_Exams
             return count;
         }
 
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Student_Page.aspx");
+        }
     }
 }

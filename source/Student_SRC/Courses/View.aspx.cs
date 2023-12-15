@@ -25,12 +25,8 @@ namespace source.Student_SRC.Courses
                 studentID = int.Parse(Session["studentID"].ToString());
             }
             string selectedValue = List.SelectedValue;
-            SemesterCode.Enabled = !(selectedValue == "-1" 
+            SemesterCodeText.Visible = SemesterCodeLabel.Visible =!(selectedValue == "-1" 
                 || selectedValue == "1" || selectedValue == "5");
-            if (!SemesterCode.Enabled)
-            {
-                SemesterCode.Text = "";
-            }
             msg.Text = " ";
         }
 
@@ -41,7 +37,7 @@ namespace source.Student_SRC.Courses
             {
                 SqlCommand command;
                 string query;
-                string CurrentSemesterCode = SemesterCode.Text;
+                string CurrentSemesterCode = SemesterCodeText.Text;
                 if(procName == "Courses_Slots_Instructor")
                 {
                     query = $"Select * From {procName}";
@@ -126,12 +122,12 @@ namespace source.Student_SRC.Courses
                 msg.Text = "Please specify the type!";
                 return;
             }
-            if(SemesterCode.Enabled && SemesterCode.Text == "")
+            if(SemesterCodeText.Visible && SemesterCodeText.Text == "")
             {
                 msg.Text = "Please Enter Semester Code!";
                 return;
             }
-            if(SemesterCode.Enabled && !Existence_Check<string>("Semester", "semester_code", SemesterCode.Text))
+            if(SemesterCodeText.Visible && !Existence_Check<string>("Semester", "semester_code", SemesterCodeText.Text))
             {
                 msg.Text = "Please Enter Valid Semester Code!";
                 return;

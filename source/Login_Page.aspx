@@ -6,13 +6,13 @@
 <head runat="server">
     <title>Login Page</title>
     <style>
-        body {
-            display: flex;
+body {
+    display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            background: linear-gradient(to right, #e7e1dc, #d1c4bb);
+            background: linear-gradient(to right, #e0e8e4, #c4d7d2);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -24,15 +24,24 @@
             width: 400px;
             text-align: center;
         }
-
-        #welcomeLabel {
+   
+     #welcomeLabel {
             color: #4b272d;
             font-size: 32px;
-            font-weight: bold;
+            font-weight: normal;
             margin-bottom: 20px;
+            font-family: 'Great Vibes', cursive;
+            display: inline-block;
+            position: relative;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
         }
 
-        label {
+        #welcomeLabel:hover {
+            transform: scale(1.1);
+        }
+  label {
             color: #4b272d;
             font-size: 18px;
             font-weight: bold;
@@ -105,7 +114,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="welcomeLabel" runat="server" Text="Welcome to Our Website!"></asp:Label>
+            <asp:Label ID="welcomeLabel" runat="server" Text="Welcome!"></asp:Label>
             <br />
             <label for="userName">UserName:</label>
             <asp:TextBox ID="userName" runat="server" placeholder="Enter your username"></asp:TextBox>

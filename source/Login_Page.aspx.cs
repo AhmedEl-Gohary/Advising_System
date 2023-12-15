@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -46,7 +47,13 @@ namespace source
                 SqlCommand FN_StudentLogin = new SqlCommand("SELECT dbo.FN_StudentLogin(@Student_id , @password)", conn);
                 FN_StudentLogin.Parameters.AddWithValue("@Student_id", id);
                 FN_StudentLogin.Parameters.AddWithValue("@password", pass);
-                bool canLogin = Boolean.Parse(FN_StudentLogin.ExecuteScalar().ToString());
+
+                bool canLogin = canLogin = Boolean.Parse(FN_StudentLogin.ExecuteScalar().ToString());
+                if (!Existence_Check<int>("Student" , "student_id" , id))
+                {
+                    msg.Text = "There is no student with this userName!";
+                    return;
+                }
                 if (canLogin)
                 {
                     Session["studentID"] = id;
@@ -54,7 +61,7 @@ namespace source
                 }
                 else
                 {
-                    msg.Text = "Invalid ID/Password or may be Blocked";
+                    msg.Text = "Invalid Password/Blocked due to financial problem!";
                 }
             }
             // advisor
@@ -87,6 +94,25 @@ namespace source
                 }
             }
             conn.Close();
+        }
+
+        private bool Existence_Check<T>(string table, string column, T columnValue)
+        {
+            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string query = $"SELECT * from {table} WHERE {column} = \'{columnValue}\'";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                if (dataTable.Rows.Count == 0)
+                {
+                    return false;
+                }
+                conn.Close();
+            }
+            return true;
         }
 
         protected void Register(object sender, EventArgs e)

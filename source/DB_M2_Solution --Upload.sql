@@ -721,7 +721,13 @@ select @requestCreditHours = Request.credit_hours from Request where Request.req
 select @type = Request.type from Request where Request.request_id = @requestID
 set @new_studentCH = @studentCH
 
-if @type like '%credit%' and @studentCH + @requestCreditHours <= 34 and @studentGPA < 3.7 and @requestCreditHours <= 3
+if @type not like '%credit%'
+THROW 51000, 'Invalid Type', 1;
+
+if (select status from Request where request_id = @requestID) <> 'Pending'
+THROW 51000, 'Invalid Status', 1;
+
+if @studentCH + @requestCreditHours <= 34 and @studentGPA < 3.7 and @requestCreditHours <= 3
 Begin
 set @stat = 'Accept' 
 set @new_studentCH = @studentCH + @requestCreditHours
@@ -747,7 +753,6 @@ set @stat = 'Reject'
 update Request
 set request.status = @stat
 where Request.request_id = @requestID
-
 
 
 
@@ -849,7 +854,13 @@ select @isoffered = Course.is_offered from course where Course.course_id = @requ
 set @prerequiste = dbo.FN_check_prerequiste(@studentid,@requestcourse_id)
 set @new_studentah = @studentah
 
-if @type like '%course%' and @studentah >= @course_hours and @isoffered = 1 and @prerequiste = 1
+if @type not like '%course%'
+THROW 51000, 'Invalid Type', 1;
+
+if (select status from Request where request_id = @requestID) <> 'Pending'
+THROW 51000, 'Invalid Status', 1;
+
+if @studentah >= @course_hours and @isoffered = 1 and @prerequiste = 1
 Begin
 set @status = 'Accept' 
 set @new_studentah = @new_studentah - @course_hours

@@ -245,88 +245,64 @@ namespace source.Advisor_SRC.Actions
 
         private void InsertCourseData(int studentID, string semesterCode, string courseName)
         {
-            try
+            string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                connection.Open();
+                string query = "Procedures_AdvisorAddCourseGP";
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    connection.Open();
-                    string query ="Procedures_AdvisorAddCourseGP";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@student_id", studentID);
-                        command.Parameters.AddWithValue("@Semester_code", semesterCode);
-                        command.Parameters.AddWithValue("@course_name", courseName);
+                    command.Parameters.AddWithValue("@student_id", studentID);
+                    command.Parameters.AddWithValue("@Semester_code", semesterCode);
+                    command.Parameters.AddWithValue("@course_name", courseName);
 
-                        command.ExecuteNonQuery();
-                    }
+                    command.ExecuteNonQuery();
                 }
-            }
-            catch (Exception ex)
-            {
-                msg.Text = "Error adding course: " + ex.Message;
-                msg.ForeColor = System.Drawing.Color.Red;
             }
             UpdateForm();
         }
 
         private void InsertGraduationPlanData(string semesterCode, DateTime expectedGraduationDate, int semCreditHours, int advisorID, int studentID)
         {
-            try
+            string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                connection.Open();
+                string query = "Procedures_AdvisorCreateGP";
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    connection.Open();
-                    string query = "Procedures_AdvisorCreateGP";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@Semester_code", semesterCode);
-                        command.Parameters.AddWithValue("@expected_graduation_date", expectedGraduationDate);
-                        command.Parameters.AddWithValue("@sem_credit_hours", semCreditHours);
-                        command.Parameters.AddWithValue("@advisor_id", advisorID);
-                        command.Parameters.AddWithValue("@student_id", studentID);
+                    command.Parameters.AddWithValue("@Semester_code", semesterCode);
+                    command.Parameters.AddWithValue("@expected_graduation_date", expectedGraduationDate);
+                    command.Parameters.AddWithValue("@sem_credit_hours", semCreditHours);
+                    command.Parameters.AddWithValue("@advisor_id", advisorID);
+                    command.Parameters.AddWithValue("@student_id", studentID);
 
-                        command.ExecuteNonQuery();
-                    }
+                    command.ExecuteNonQuery();
                 }
-            }
-            catch (Exception ex)
-            {
-                msg.Text = "Error adding graduation plan: " + ex.Message;
-                msg.ForeColor = System.Drawing.Color.Red;
             }
             UpdateForm();
         }
 
         private void UpdateGraduationPlanData(DateTime expectedGradDate, int studentID)
         {
-            try
+            string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                connection.Open();
+                string query = "Procedures_AdvisorUpdateGP";
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    connection.Open();
-                    string query = "Procedures_AdvisorUpdateGP";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@expected_grad_date", expectedGradDate);
-                        command.Parameters.AddWithValue("@studentID", studentID);
+                    command.Parameters.AddWithValue("@expected_grad_date", expectedGradDate);
+                    command.Parameters.AddWithValue("@studentID", studentID);
 
-                        command.ExecuteNonQuery();
-                    }
+                    command.ExecuteNonQuery();
                 }
-            }
-            catch (SqlException ex)
-            {
-                msg.Text = "Error updating graduation plan: " + ex.Message;
-                msg.ForeColor = System.Drawing.Color.Red;
             }
             UpdateForm();
         }

@@ -16,6 +16,7 @@ namespace source.Advisor_SRC.Actions
         int advisorId;
         protected void Page_Load(object sender, EventArgs e)
         {
+            msg.Text = " ";
             if (Session == null || Session["advisorID"] == null)
             {
                 Response.Redirect("~/Error_Page.aspx");
@@ -30,75 +31,89 @@ namespace source.Advisor_SRC.Actions
         protected void submitButton_Click(object sender, EventArgs e)
         {
             string itemTypeValue = itemType.SelectedValue;
+            int requestID = 0; 
+            string semesterCode = Request.Form["Semester Code"];
+
+            try
+            {
+                requestID = int.Parse(Request.Form["Request ID"]);
+            }
+            catch 
+            {
+                msg.Text = "Request id must be a Number!";
+                msg.ForeColor = System.Drawing.Color.Red;
+                goto lastLine;
+            }
+
+            if (!Existence_Check<int>("Request", "request_id", requestID))
+            {
+                msg.Text = "Request id doesn't exist";
+                msg.ForeColor = System.Drawing.Color.Red;
+                goto lastLine;
+            }
+            else if (!Existence_Check<string>("Semester", "semester_code", semesterCode))
+            {
+                msg.Text = "Semester Code doesn't exist";
+                msg.ForeColor = System.Drawing.Color.Red;
+                goto lastLine;
+            }
 
             if (itemTypeValue == "HandleCreditHoursRequests")
             {
                 try
                 {
-                    int requestID = int.Parse(Request.Form["Request ID"]);
-                    string semesterCode = Request.Form["Semester Code"];
-                    
-                    if (!Existence_Check<int>("Request", "request_id", requestID))
+                    HandleCreditHoursRequest(requestID, semesterCode);
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Message == "Invalid Type")
                     {
-                        msg.Text = "Request id doesn't exist";
-                        msg.ForeColor = System.Drawing.Color.Red;
-
-                    } 
-                    else if (!Existence_Check<string>("Semester", "semester_code", semesterCode))
+                        msg.Text = "This request is not a credit-hours request!";
+                    }
+                    else if (ex.Message == "Invalid Status")
                     {
-                        msg.Text = "Semester Code doesn't exist";
-                        msg.ForeColor = System.Drawing.Color.Red;
-                        
-                    } 
+                        msg.Text = "This request is already handled!";
+                    }
                     else
                     {
-                        HandleCreditHoursRequest(requestID, semesterCode);
-
-                        msg.Text = "Credit hour request was handled successfully";
-                        msg.ForeColor = System.Drawing.Color.Green;
+                        msg.Text = "Error took Place: " + ex.Message;
                     }
-                }
-                catch (Exception ex)
-                {
-                    msg.Text = "Error handling credit hour request: " + ex.Message;
                     msg.ForeColor = System.Drawing.Color.Red;
+                    goto lastLine;
                 }
+
+                msg.Text = "Credit hour request was handled successfully";
+                msg.ForeColor = System.Drawing.Color.Green;
             }
+
             else if (itemTypeValue == "HandleCourseRequests")
             {
-
                 try
                 {
-                    int requestID = int.Parse(Request.Form["Request ID"]);
-                    string semesterCode = Request.Form["Semester Code"];
-
-                    if (!Existence_Check<int>("Request", "request_id", requestID))
+                    HandleCourseRequest(requestID, semesterCode);
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Message == "Invalid Type")
                     {
-                        msg.Text = "Request id doesn't exist";
-                        msg.ForeColor = System.Drawing.Color.Red;
-
+                        msg.Text = "This request is not a course request!";
                     }
-                    else if (!Existence_Check<string>("Semester", "semester_code", semesterCode))
+                    else if (ex.Message == "Invalid Status")
                     {
-                        msg.Text = "Semester Code doesn't exist";
-                        msg.ForeColor = System.Drawing.Color.Red;
-
+                        msg.Text = "This request is already handled!";
                     }
                     else
                     {
-                        HandleCourseRequest(requestID, semesterCode);
-
-                        msg.Text = "Course request was handled successfully";
-                        msg.ForeColor = System.Drawing.Color.Green;
+                        msg.Text = "The Student is already taking this course in this semester!";
                     }
-                }
-                catch (Exception ex)
-                {
-                    msg.Text = "Error handling credit hour request: " + ex.Message;
                     msg.ForeColor = System.Drawing.Color.Red;
+                    goto lastLine;
                 }
+
+                msg.Text = "Course request was handled successfully";
+                msg.ForeColor = System.Drawing.Color.Green;
             }
-            UpdateForm();
+            lastLine:  UpdateForm();
         }
 
 
@@ -132,54 +147,38 @@ namespace source.Advisor_SRC.Actions
 
         private void HandleCreditHoursRequest(int requestID, string semesterCode)
         {
-            try
+            string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                connection.Open();
+                string query = "Procedures_AdvisorApproveRejectCHRequest";
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    connection.Open();
-                    string query = "Procedures_AdvisorApproveRejectCHRequest";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
+                    command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@requestID", requestID);
-                        command.Parameters.AddWithValue("@current_sem_code", semesterCode);
-                        command.ExecuteNonQuery();
-                    }
+                    command.Parameters.AddWithValue("@requestID", requestID);
+                    command.Parameters.AddWithValue("@current_sem_code", semesterCode);
+                    command.ExecuteNonQuery();
                 }
-            }
-            catch (Exception ex)
-            {
-                msg.Text = "Error adding course: " + ex.Message;
-                msg.ForeColor = System.Drawing.Color.Red;
             }
             UpdateForm();
         }
 
         private void HandleCourseRequest(int requestID, string semesterCode)
         {
-            try
+            string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                connection.Open();
+                string query = "Procedures_AdvisorApproveRejectCourseRequest";
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    connection.Open();
-                    string query = "Procedures_AdvisorApproveRejectCourseRequest";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
+                    command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@requestID", requestID);
-                        command.Parameters.AddWithValue("@current_sem_code", semesterCode);
-                        command.ExecuteNonQuery();
-                    }
+                    command.Parameters.AddWithValue("@requestID", requestID);
+                    command.Parameters.AddWithValue("@current_semester_code", semesterCode);
+                    command.ExecuteNonQuery();
                 }
-            }
-            catch (Exception ex)
-            {
-                msg.Text = "Error adding course: " + ex.Message;
-                msg.ForeColor = System.Drawing.Color.Red;
             }
             UpdateForm();
         }

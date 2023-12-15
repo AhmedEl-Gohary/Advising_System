@@ -212,8 +212,8 @@ from Payment Inner join Student on Payment.student_id = Student.student_id
 go
 CREATE  VIEW  Courses_Slots_Instructor AS
 Select Course.course_id as CourseID , Course.name As Course, Slot.*, Instructor.name as Instructor
-from Course inner join Slot on Course.course_id = Slot.course_id
-inner join Instructor on Slot.instructor_id = Instructor.instructor_id
+from Course left outer join Slot on Course.course_id = Slot.course_id
+left outer join Instructor on Slot.instructor_id = Instructor.instructor_id
 
 go
 ----------------------all courses along with their exams’ details-----------------------------------------------------------------
@@ -721,7 +721,7 @@ select @requestCreditHours = Request.credit_hours from Request where Request.req
 select @type = Request.type from Request where Request.request_id = @requestID
 set @new_studentCH = @studentCH
 
-if @type like '%credit%' and @studentCH + @requestCreditHours<=34 and @studentGPA < 3.7 and @requestCreditHours<=3
+if @type like '%credit%' and @studentCH + @requestCreditHours <= 34 and @studentGPA < 3.7 and @requestCreditHours <= 3
 Begin
 set @stat = 'Accept' 
 set @new_studentCH = @studentCH + @requestCreditHours

@@ -54,7 +54,7 @@ namespace source
                 }
                 else
                 {
-                    msg.Text = "You Can't Login!";
+                    msg.Text = "Invalid ID/Password or may be Blocked";
                 }
             }
             // advisor
@@ -71,7 +71,7 @@ namespace source
                 }
                 else
                 {
-                    msg.Text = "You Can't Login!";
+                    msg.Text = "Invalid ID/Password";
                 }
             }
             // admin
@@ -83,7 +83,7 @@ namespace source
                 }
                 else
                 {
-                    msg.Text = "Invalid Admin";
+                    msg.Text = "Invalid ID/Password";
                 }
             }
             conn.Close();

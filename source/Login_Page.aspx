@@ -95,6 +95,20 @@
             <label for="password">Password:</label>
             <br />
             <asp:TextBox ID="password" runat="server" TextMode="Password"></asp:TextBox>
+            <span id="eyeIcon" class="eye-icon" onclick="togglePassword()">🔒</span>
+            <script>
+                function togglePassword() {
+                    var passwordInput = document.getElementById('password');
+                    var eyeIcon = document.getElementById('eyeIcon');
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        eyeIcon.textContent = '👁️';
+                    } else {
+                        passwordInput.type = 'password';
+                        eyeIcon.textContent = '🔒';
+                    }
+                }
+            </script>
             <br />
             <br />
             <asp:DropDownList ID="list" runat="server" Width="250px">
@@ -107,6 +121,7 @@
             <asp:Label ID="msg" runat="server" Text=" " ForeColor="Red"></asp:Label>
             <br />
             <asp:Button ID="login" runat="server" OnClick="Login" Text="Login" />
+            <br />
             <br />
             <asp:Label ID="goToRegister" runat="server" Text="Don't have an account yet?"></asp:Label>
             <asp:LinkButton ID="LinkButton1" OnClick="Register" runat="server">Register here</asp:LinkButton>

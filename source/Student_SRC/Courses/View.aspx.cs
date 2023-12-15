@@ -18,7 +18,7 @@ namespace source.Student_SRC.Courses
         {
             if (Session == null || Session["studentID"] == null)
             {
-                Response.Redirect("../../Error_Page.aspx");
+                Response.Redirect("~/Error_Page.aspx");
             }
             else
             {
@@ -70,7 +70,6 @@ namespace source.Student_SRC.Courses
                 DataTable dataTable = new DataTable();
                 connection.Open();
                 adapter.Fill(dataTable);
-                connection.Close();
                 GridView1.DataSource = dataTable;
                 GridView1.DataBind();
             }
@@ -125,6 +124,11 @@ namespace source.Student_SRC.Courses
             if (procName == "")
             {
                 msg.Text = "Please specify the type!";
+                return;
+            }
+            if(SemesterCode.Enabled && SemesterCode.Text == "")
+            {
+                msg.Text = "Please Enter Semester Code!";
                 return;
             }
             BindGridView(procName);

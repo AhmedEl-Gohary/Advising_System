@@ -134,6 +134,7 @@ namespace source.Admin_SRC
 
 		private void AddInputField(string labelText)
 		{
+
 			if (labelText.ToLower().Contains("offered"))
 			{
 				LiteralControl label = new LiteralControl("<label>" + labelText + ":</label>");
@@ -168,6 +169,8 @@ namespace source.Admin_SRC
 				dynamicFields.Controls.Add(textBox);
 				dynamicFields.Controls.Add(new LiteralControl("<br/>"));
 			}
+
+			
 		}
 
 

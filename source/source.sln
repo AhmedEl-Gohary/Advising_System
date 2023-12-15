@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{953E1C19-9BEF-41B9-A696-F603465ABFFD}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Web.config = Web.config
 	EndProjectSection
 EndProject
 Global

@@ -29,7 +29,6 @@ namespace source.Student_SRC.Courses
                 {
                     Label1.Text = "No Courses Yet!";
                 }
-                conn.Close();
             }
         }
     }

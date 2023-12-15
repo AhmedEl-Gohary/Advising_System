@@ -18,7 +18,7 @@ namespace source.Student_SRC.Makeup_Exams
         {
             if (Session == null || Session["studentID"] == null)
             {
-                Response.Redirect("../Error_Page.aspx");
+                Response.Redirect("../../Error_Page.aspx");
             }
             else
             {
@@ -88,7 +88,7 @@ namespace source.Student_SRC.Makeup_Exams
             }
         }
 
-        private bool Existence_Check <T> (string table , string column ,  T columnValue) 
+        private bool Existence_Check<T> (string table , string column ,  T columnValue) 
         {
             string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
             using (SqlConnection conn = new SqlConnection(connstr))
@@ -124,5 +124,9 @@ namespace source.Student_SRC.Makeup_Exams
             return count;
         }
 
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Student_Page.aspx");
+        }
     }
 }

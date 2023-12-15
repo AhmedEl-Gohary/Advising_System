@@ -17,7 +17,7 @@ namespace source.Student_SRC.Main
         {
             if (Session == null || Session["studentID"] == null)
             {
-                Response.Redirect("../../Error_Page.aspx");
+                Response.Redirect("~/Error_Page.aspx");
             }
             else
             {
@@ -63,7 +63,6 @@ namespace source.Student_SRC.Main
                     }
                     return;
                 }
-                connection.Close();
             }
             msg.Text = "Phone Number Added Successfully!";
             Load_Contacts();

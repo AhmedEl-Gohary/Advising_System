@@ -13,14 +13,23 @@ namespace source.Advisor_SRC.Students
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            string selectedValue = list.SelectedValue;
+            Label1.Text = " ";
+            if (selectedValue != "2")
+            {
+                txtMajor.Visible = false;
+            }
+            else
+            {
+                txtMajor.Visible = true;
+            }
+            if (Session == null || Session["advisorID"] == null)
+            {
+                Response.Redirect("~/Error_Page.aspx");
+            }
+            else
             {
                 advisorID = int.Parse(Session["advisorID"].ToString());
-
-            }
-            catch
-            {
-                advisorID = 0;
             }
         }
 
@@ -74,6 +83,11 @@ namespace source.Advisor_SRC.Students
 
                     GridView1.DataSource = dataTable;
                     GridView1.DataBind();
+                    if(dataTable.Rows.Count == 0)
+                    {
+                        string suffix = (selectedValue == "2" ? $" in major: {major}" : " ");
+                        msg.Text = $"You don't any assigned Students{suffix}!";
+                    }
                 }
             }
         }

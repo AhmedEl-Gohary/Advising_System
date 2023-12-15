@@ -27,6 +27,8 @@
 
             <asp:GridView ID="GridViewRequests" runat="server" AutoGenerateColumns="true">
             </asp:GridView>
+            <asp:Label ID="Label1" runat="server" Text=" "></asp:Label>
+            <br />
         </div>
     </form>
 </body>

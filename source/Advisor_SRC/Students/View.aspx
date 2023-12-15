@@ -11,13 +11,19 @@
         <div>
             <h2>Students View</h2>
 
-            <asp:DropDownList ID="list" runat="server" Width="250px" OnSelectedIndexChanged="list_SelectedIndexChanged">
+            <asp:DropDownList ID="list" runat="server" Width="250px" 
+                OnSelectedIndexChanged="list_SelectedIndexChanged" AutoPostBack="true">
                 <asp:ListItem Enabled="true" Text="choose a listing option" Value="-1"></asp:ListItem>
                 <asp:ListItem Text="Assigned Students" Value="1"></asp:ListItem>
                 <asp:ListItem Text="Assigned Students In a Major" Value="2"></asp:ListItem>
             </asp:DropDownList>
 
+            <br />
+            <br />
+
             <asp:TextBox ID="txtMajor" runat="server" Visible="false" placeholder="Enter Major"></asp:TextBox>
+
+            <br />
 
             <asp:Button ID="button" runat="server" OnClick="OnButtonClick" Text="View Students" />
             <br />
@@ -26,6 +32,8 @@
 
             <asp:GridView ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             </asp:GridView>
+            <asp:Label ID="Label1" runat="server" Text=" "></asp:Label>
+            <br />
         </div>
     </form>
 </body>

@@ -9,6 +9,9 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Button ID="Go_Back" runat="server" Text="Go Back" OnClick="Go_Back_Click"/>
+            <br />
+            <br />
             <asp:Label ID="Label1" runat="server" Text="View  "></asp:Label>
             <asp:DropDownList ID="List" runat="server" AutoPostBack="true">
                 <asp:ListItem Value="-1">Choose</asp:ListItem>

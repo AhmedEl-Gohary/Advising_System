@@ -131,11 +131,40 @@ namespace source.Student_SRC.Courses
                 msg.Text = "Please Enter Semester Code!";
                 return;
             }
+            if(SemesterCode.Enabled && !Existence_Check<string>("Semester", "semester_code", SemesterCode.Text))
+            {
+                msg.Text = "Please Enter Valid Semester Code!";
+                return;
+            }
             BindGridView(procName);
             if (GridView1.Rows.Count == 0)
             {
                 msg.Text = GetMessage(selectedValue);
             }
+        }
+
+        private bool Existence_Check<T>(string table, string column, T columnValue)
+        {
+            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string query = $"SELECT * from {table} WHERE {column} = \'{columnValue}\'";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                if (dataTable.Rows.Count == 0)
+                {
+                    return false;
+                }
+                conn.Close();
+            }
+            return true;
+        }
+
+        protected void Go_Back_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Student_Page.aspx");
         }
     }
 }

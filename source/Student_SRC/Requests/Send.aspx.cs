@@ -61,6 +61,10 @@ namespace source.Student_SRC.Requests
                     {
                         throw new Exception();
                     }
+                    if(!Existence_Check<int> ("Course", "course_id", value) && type == "course")
+                    {
+                        throw new Exception();
+                    }
                     command.Parameters.AddWithValue($"@{attribute}", value);
                  }
                 catch
@@ -147,6 +151,25 @@ namespace source.Student_SRC.Requests
         {
             TextBox1.Text = "";
             Comment_Text.Text = "";
+        }
+
+        private bool Existence_Check<T>(string table, string column, T columnValue)
+        {
+            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string query = $"SELECT * from {table} WHERE {column} = \'{columnValue}\'";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                if (dataTable.Rows.Count == 0)
+                {
+                    return false;
+                }
+                conn.Close();
+            }
+            return true;
         }
     }
 }

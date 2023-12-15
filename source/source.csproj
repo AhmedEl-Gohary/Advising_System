@@ -69,7 +69,9 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="Admin_SRC\Add.aspx" />
-    <Content Include="Admin_SRC\Admin_Page.aspx" />
+    <Content Include="..\..\..\Users\ahmed\OneDrive\Pictures\Admin_Page.aspx">
+      <Link>Admin_SRC\Admin_Page.aspx</Link>
+    </Content>
     <Content Include="Admin_SRC\Delete.aspx" />
     <Content Include="Admin_SRC\Issue.aspx" />
     <Content Include="Admin_SRC\Link.aspx" />
@@ -306,7 +308,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".editorconfig" />
     <None Include="packages.config" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">

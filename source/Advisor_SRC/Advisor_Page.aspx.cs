@@ -24,7 +24,6 @@ namespace source.Advisor_SRC
             {
                 advisorID = int.Parse(Session["advisorID"].ToString());
             }
-            
         }
 
         protected void SelectedNodeChanged(object sender, EventArgs e)
@@ -35,17 +34,11 @@ namespace source.Advisor_SRC
                 case "Students":
                     Response.Redirect("Students/View.aspx");
                     break;
-                case "Requests":
+                case "View Requests":
                     Response.Redirect("Requests/View.aspx");
                     break;
-                case "Add Course":
+                case "Actions":
                     Response.Redirect("Actions/Add_Course.aspx");
-                    break;
-                case "Add Graduation Plan":
-                    Response.Redirect("Actions/Add_Grad_Plan.aspx");
-                    break;
-                case "Update Graduation Plan":
-                    Response.Redirect("Actions/Update_Grad_Plan.aspx");
                     break;
                 case "Handle Requests":
                     Response.Redirect("Actions/Handle_Requests.aspx");

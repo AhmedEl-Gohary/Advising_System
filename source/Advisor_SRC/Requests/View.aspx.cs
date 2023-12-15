@@ -16,13 +16,13 @@ namespace source.Advisor_SRC.Requests
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (Session == null || Session["advisorID"] == null)
+            {
+                Response.Redirect("~/Error_Page.aspx");
+            }
+            else
             {
                 advisorID = int.Parse(Session["advisorID"].ToString());
-            }
-            catch
-            {
-                advisorID = 0;
             }
         }
 
@@ -56,10 +56,12 @@ namespace source.Advisor_SRC.Requests
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                 {
+                    string placeHolder = "";
                     if (selectedValue == "Pending")
                     {
                         adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
                         adapter.SelectCommand.Parameters.AddWithValue("@Advisor_ID", advisorID);
+                        placeHolder = "Pending ";
                     }
 
                     DataTable dataTable = new DataTable();
@@ -67,6 +69,10 @@ namespace source.Advisor_SRC.Requests
 
                     GridViewRequests.DataSource = dataTable;
                     GridViewRequests.DataBind();
+                    if (dataTable.Rows.Count == 0)
+                    {
+                        Label1.Text = $"You don't have {placeHolder}Requests !";
+                    }
                 }
             }
         }

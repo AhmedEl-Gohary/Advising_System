@@ -42,15 +42,6 @@ namespace source.Advisor_SRC
         protected global::System.Web.UI.WebControls.Label fillInLabel;
 
         /// <summary>
-        /// nameLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label nameLabel;
-
-        /// <summary>
         /// name control.
         /// </summary>
         /// <remarks>
@@ -58,15 +49,6 @@ namespace source.Advisor_SRC
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox name;
-
-        /// <summary>
-        /// officeLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label officeLabel;
 
         /// <summary>
         /// office control.
@@ -78,15 +60,6 @@ namespace source.Advisor_SRC
         protected global::System.Web.UI.WebControls.TextBox office;
 
         /// <summary>
-        /// emailLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label emailLabel;
-
-        /// <summary>
         /// email control.
         /// </summary>
         /// <remarks>
@@ -94,15 +67,6 @@ namespace source.Advisor_SRC
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox email;
-
-        /// <summary>
-        /// passwordLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label passwordLabel;
 
         /// <summary>
         /// password control.

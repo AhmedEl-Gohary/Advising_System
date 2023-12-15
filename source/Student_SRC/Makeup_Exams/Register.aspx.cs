@@ -88,7 +88,7 @@ namespace source.Student_SRC.Makeup_Exams
             }
         }
 
-        private bool Existence_Check <T> (string table , string column ,  T columnValue) 
+        private bool Existence_Check<T> (string table , string column ,  T columnValue) 
         {
             string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
             using (SqlConnection conn = new SqlConnection(connstr))

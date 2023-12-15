@@ -13,11 +13,20 @@ namespace source.Advisor_SRC.Actions
 {
     public partial class Add_Course : System.Web.UI.Page
     {
+
+        int advisorId;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session == null || Session["advisorID"] == null)
+            {
+                Response.Redirect("~/Error_Page.aspx");
+            } 
+            else
+            {
+                advisorId = int.Parse(Session["advisorID"].ToString());
+            }
         }
-        
+
 
         protected void submitButton_Click(object sender, EventArgs e)
         {
@@ -33,7 +42,7 @@ namespace source.Advisor_SRC.Actions
 
                     InsertCourseData(studentID, semesterCode, courseName);
 
-                    msg.Text = "Add Course was successful!";
+                    msg.Text = "Adding Course was successful!";
                     msg.ForeColor = System.Drawing.Color.Green;
                 }
                 catch (Exception ex)
@@ -56,7 +65,8 @@ namespace source.Advisor_SRC.Actions
                                                                         advisorID, studentID);
 
 
-                    msg.Text = "Add Graduation Plan was successful!";
+
+                    msg.Text = "Graduation Plan was added successful!";
                     msg.ForeColor = System.Drawing.Color.Green;
                 }
                 catch (Exception ex)
@@ -83,6 +93,7 @@ namespace source.Advisor_SRC.Actions
                     msg.ForeColor = System.Drawing.Color.Red;
                 }
             }
+            UpdateForm();
         }
 
 
@@ -94,7 +105,7 @@ namespace source.Advisor_SRC.Actions
         private void UpdateForm()
         {
             string itemTypeValue = itemType.SelectedValue;
-            dynamicFields.Controls.Clear(); 
+            dynamicFields.Controls.Clear();
 
             if (itemTypeValue == "addCourse")
             {
@@ -124,15 +135,15 @@ namespace source.Advisor_SRC.Actions
             LiteralControl label = new LiteralControl("<label for='" + labelText + "'>" + labelText + ":</label>");
             TextBox textBox = new TextBox { ID = labelText, TextMode = TextBoxMode.SingleLine };
 
-            
+
             if (labelText.ToLower().Contains("date"))
             {
                 textBox.TextMode = TextBoxMode.Date;
             }
 
-            textBox.Style["margin-bottom"] = "10px"; 
+            textBox.Style["margin-bottom"] = "10px";
             dynamicFields.Controls.Add(label);
-            dynamicFields.Controls.Add(new LiteralControl("&nbsp;")); 
+            dynamicFields.Controls.Add(new LiteralControl("&nbsp;"));
             dynamicFields.Controls.Add(textBox);
             dynamicFields.Controls.Add(new LiteralControl("<br/>"));
         }
@@ -145,7 +156,7 @@ namespace source.Advisor_SRC.Actions
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "[Procedures_AdvisorAddCourseGP]";
+                    string query ="Procedures_AdvisorAddCourseGP";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -163,6 +174,7 @@ namespace source.Advisor_SRC.Actions
                 msg.Text = "Error adding course: " + ex.Message;
                 msg.ForeColor = System.Drawing.Color.Red;
             }
+            UpdateForm();
         }
 
         private void InsertGraduationPlanData(string semesterCode, DateTime expectedGraduationDate, int semCreditHours, int advisorID, int studentID)
@@ -173,7 +185,7 @@ namespace source.Advisor_SRC.Actions
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "[Procedures_AdvisorCreateGP]";
+                    string query = "Procedures_AdvisorCreateGP";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -193,6 +205,7 @@ namespace source.Advisor_SRC.Actions
                 msg.Text = "Error adding graduation plan: " + ex.Message;
                 msg.ForeColor = System.Drawing.Color.Red;
             }
+            UpdateForm();
         }
 
         private void UpdateGraduationPlanData(DateTime expectedGradDate, int studentID)
@@ -203,7 +216,7 @@ namespace source.Advisor_SRC.Actions
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "[Procedures_AdvisorUpdateGP]";
+                    string query = "Procedures_AdvisorUpdateGP";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -215,11 +228,12 @@ namespace source.Advisor_SRC.Actions
                     }
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 msg.Text = "Error updating graduation plan: " + ex.Message;
                 msg.ForeColor = System.Drawing.Color.Red;
             }
+            UpdateForm();
         }
     }
 }

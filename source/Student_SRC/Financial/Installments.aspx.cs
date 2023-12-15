@@ -17,7 +17,7 @@ namespace source.Student_SRC.Financial
             int studentId = 0;
             if (Session == null || Session["studentID"] == null)
             {
-                Response.Redirect("../Error_Page.aspx");
+                Response.Redirect("../../Error_Page.aspx");
             }
             else
             {

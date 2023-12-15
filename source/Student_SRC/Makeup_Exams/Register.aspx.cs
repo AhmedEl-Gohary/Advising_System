@@ -18,7 +18,7 @@ namespace source.Student_SRC.Makeup_Exams
         {
             if (Session == null || Session["studentID"] == null)
             {
-                Response.Redirect("../Error_Page.aspx");
+                Response.Redirect("../../Error_Page.aspx");
             }
             else
             {

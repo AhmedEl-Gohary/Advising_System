@@ -135,9 +135,12 @@ namespace source.Admin_SRC
 		{
 			LiteralControl label = new LiteralControl("<label for='" + labelText + "'>" + labelText + ":</label>");
 			TextBox textBox = new TextBox { ID = labelText, TextMode = TextBoxMode.SingleLine };
+            if (labelText.ToLower().Contains("date"))
+            {
+                textBox.TextMode = TextBoxMode.Date;
+            }
 
-
-			dynamicFields.Controls.Add(label);
+            dynamicFields.Controls.Add(label);
 			dynamicFields.Controls.Add(new LiteralControl("<br/>"));
 			dynamicFields.Controls.Add(textBox);
 			dynamicFields.Controls.Add(new LiteralControl("<br/>"));

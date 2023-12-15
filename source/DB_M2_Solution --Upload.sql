@@ -909,12 +909,16 @@ AS
 Begin
 Declare
 @success bit,
-@pass varchar(40)
+@pass varchar(40),
+@status bit
 
 if(@Student_id is null or @password is null)
 return 0
 
-select @pass = password from Student where Student.student_id = @Student_id and Student.financial_status = 1
+select @status = financial_status from Student where student_id = @Student_id;
+
+select @pass = password from Student where Student.student_id = @Student_id 
+and (@status is null or @status = 0)
 if(@pass = @password)
 set @success = 1 
 else 
@@ -1087,7 +1091,8 @@ declare
 
 select @countOfRows = COUNT(*) 
 from Student_Instructor_Course_take where Student_Instructor_Course_take.exam_type In ( 'First_Makeup', 'Normal') and
-Student_Instructor_Course_take.grade in ('F','FF',NULL) 
+(Student_Instructor_Course_take.grade in ('F','FF')
+OR Student_Instructor_Course_take.grade is NULL)
 AND Student_Instructor_Course_take.course_id = @CourseID
 AND Student_Instructor_Course_take.student_id = @StudentID
 

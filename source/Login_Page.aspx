@@ -122,6 +122,7 @@
             <br />
             <asp:Button ID="login" runat="server" OnClick="Login" Text="Login" />
             <br />
+            <br />
             <asp:Label ID="goToRegister" runat="server" Text="Don't have an account yet?"></asp:Label>
             <asp:LinkButton ID="LinkButton1" OnClick="Register" runat="server">Register here</asp:LinkButton>
             <br />

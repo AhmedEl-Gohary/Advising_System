@@ -80,6 +80,10 @@
             color: #333;
             font-size: 16px;
         }
+
+        #eyeIcon:hover {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -121,6 +125,7 @@
             <asp:Label ID="msg" runat="server" Text=" " ForeColor="Red"></asp:Label>
             <br />
             <asp:Button ID="login" runat="server" OnClick="Login" Text="Login" />
+            <br />
             <br />
             <asp:Label ID="goToRegister" runat="server" Text="Don't have an account yet?"></asp:Label>
             <asp:LinkButton ID="LinkButton1" OnClick="Register" runat="server">Register here</asp:LinkButton>

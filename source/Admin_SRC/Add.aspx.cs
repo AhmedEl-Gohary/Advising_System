@@ -37,10 +37,10 @@ namespace source.Admin_SRC
 				string semesterCode;
 				try
 				{
-					warning= "Invalid start date! Dates should be of the form (DD/MM/YY).";
+					warning= "Invalid start date! Select a valid date.";
 					startDate = DateTime.Parse(Request.Form["Start Date"]);
 
-					warning = "Invalid end date!Dates should be of the form (DD/MM/YY).";
+					warning = "Invalid end date! Select a valid date.";
 					endDate = DateTime.Parse(Request.Form["End Date"]);
 
 					warning = "Invalid semester code! Semester code can't be empty";
@@ -75,7 +75,8 @@ namespace source.Admin_SRC
 						throw new InvalidDataException();
 
 					warning = "Invalid offered input! Offered should be True or False. ";
-					offered = Boolean.Parse(Request.Form["Offered"]);
+					string isoffered =Request.Form["Offered"];
+					offered =  (isoffered == "Yes")? true: false;
 
 					warning = "Invalid semester number !Semester number should be in the range 1-10.";
 					semester = Int16.Parse(Request.Form["Semester"]);
@@ -110,7 +111,7 @@ namespace source.Admin_SRC
 					if (type == "")
 						throw new InvalidDataException();
 
-					warning = "Invalid date! A date should be pf the form (DD/MM/YY).";
+					warning = "Invalid date! Select a valid date.";
 					date = DateTime.Parse(Request.Form["Date"]);
 
 					warning = "Invalid course ID! Course id should be a positive integer.";
@@ -133,14 +134,42 @@ namespace source.Admin_SRC
 
 		private void AddInputField(string labelText)
 		{
-			LiteralControl label = new LiteralControl("<label for='" + labelText + "'>" + labelText + ":</label>");
-			TextBox textBox = new TextBox { ID = labelText, TextMode = TextBoxMode.SingleLine };
 
+			if (labelText.ToLower().Contains("offered"))
+			{
+				LiteralControl label = new LiteralControl("<label>" + labelText + ":</label>");
 
-			dynamicFields.Controls.Add(label);
-			dynamicFields.Controls.Add(new LiteralControl("<br/>"));
-			dynamicFields.Controls.Add(textBox);
-			dynamicFields.Controls.Add(new LiteralControl("<br/>"));
+				RadioButtonList radioButtons = new RadioButtonList();
+				radioButtons.ID = labelText;
+				ListItem itemYes = new ListItem("Yes", "Yes");
+				ListItem itemNo = new ListItem("No", "No");
+
+				itemNo.Selected = true;
+
+				radioButtons.Items.Add(itemYes);
+				radioButtons.Items.Add(itemNo);
+				radioButtons.Text = "Yes";
+				dynamicFields.Controls.Add(label);
+				dynamicFields.Controls.Add(new LiteralControl("<br/>"));
+				dynamicFields.Controls.Add(radioButtons);
+				dynamicFields.Controls.Add(new LiteralControl("<br/>"));
+			}
+			else
+			{
+				LiteralControl label = new LiteralControl("<label for='" + labelText + "'>" + labelText + ":</label>");
+				TextBox textBox = new TextBox { ID = labelText, TextMode = TextBoxMode.SingleLine };
+
+				if (labelText.ToLower().Contains("date"))
+				{
+					textBox.TextMode = TextBoxMode.Date;
+				}
+
+				dynamicFields.Controls.Add(label);
+				dynamicFields.Controls.Add(new LiteralControl("<br/>"));
+				dynamicFields.Controls.Add(textBox);
+				dynamicFields.Controls.Add(new LiteralControl("<br/>"));
+			}
+
 			
 		}
 
@@ -177,7 +206,6 @@ namespace source.Admin_SRC
 
 		private void InsertCourseData(string major ,int semester, int creditHours, string courseName, bool offered)
 		{
-			
 			string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{

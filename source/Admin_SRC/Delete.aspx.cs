@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -37,7 +38,7 @@ namespace source.Admin_SRC
             string itemTypeValue = itemType.SelectedValue;
             if (itemTypeValue == "balabizo")
             {
-                msg.Text = "Please select an Item !";
+                msg.Text = "Please, select an Item To delete.";
                 return;
             }
             UpdateForm();
@@ -49,10 +50,12 @@ namespace source.Admin_SRC
                 try
                 {
                     Course_Id = int.Parse(Request.Form["Course_id"]);
+                    if (Course_Id < 0)
+                        throw new InvalidDataException();
                 }
                 catch
                 {
-                    msg.Text = "Invalid Course ID";
+                    msg.Text = "Invalid course ID! Course ID is a positive integer.";
                     UpdateForm();
                     return;
                 }
@@ -62,7 +65,7 @@ namespace source.Admin_SRC
                 int newcnt = Count_Rows("Course");
                 if (oldcnt == newcnt)
                 {
-                    msg.Text = "Course Already Deleted";
+                    msg.Text = "Course ID does not exist!";
                     msg.ForeColor = System.Drawing.Color.Red;
                 }
                 else
@@ -80,12 +83,12 @@ namespace source.Admin_SRC
                 int newcnt = Count_Rows("Course");
                 if (oldcnt == newcnt)
                 {
-                    msg.Text = "Slot Already Deleted";
+                    msg.Text = "No slots were deleted! this semester do not have slots assigned to unoffered courses.";
                     msg.ForeColor = System.Drawing.Color.Red;
                 }
                 else
                 {
-                    msg.Text = "Slot deleted Successfully";
+                    msg.Text = "Slots deleted Successfully";
                     msg.ForeColor = System.Drawing.Color.Green;
                 }
                 UpdateForm();

@@ -4,85 +4,101 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Login Page</title>
     <style>
         body {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            background-color: #f0f0f0; 
+            background: linear-gradient(to right, #e7e1dc, #d1c4bb);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         #form1 {
-            background-color: #fff; 
-            padding: 20px;
-            border-radius: 10px; 
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
-        }
-
-        #welcomeLabel {
-            color: #333; 
-            font-size: 24px;
-            font-weight: bold;
+            background: linear-gradient(to right, #ffffff, #f5f2f0);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
             text-align: center;
         }
 
-        label {
-            color: #333;
-            font-size: 16px;
+        #welcomeLabel {
+            color: #4b272d;
+            font-size: 32px;
             font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        label {
+            color: #4b272d;
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        #userName, #password, #list {
+            width: 100%;
+            padding: 15px;
             margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: #f5f2f0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #4b272d;
         }
 
-        #userName, #password {
-            width: 250px;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px; 
-        }
-
-        #list {
-            width: 250px;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd; 
-            border-radius: 5px; 
+        #eyeIcon {
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            cursor: pointer;
         }
 
         #msg {
-            color: red;
+            color: #acabb9;
             margin-top: 10px;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         #login {
-            background-color: #4CAF50; 
-            color: white; 
-            border: none; 
-            padding: 15px 30px; 
+            background: linear-gradient(to right, #4caf50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 0;
+            width: 100%;
             font-size: 18px;
-            cursor: pointer; 
-            border-radius: 10px; 
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            transition: box-shadow 0.3s ease;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
         }
 
         #login:hover {
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); 
+            background: linear-gradient(to right, #45a049, #4caf50);
         }
 
         #goToRegister {
             margin-top: 20px;
-            color: #333;
+            color: #4b272d;
             font-size: 16px;
         }
 
-        #eyeIcon:hover {
-            cursor: pointer;
+        #LinkButton1 {
+            color: #4b272d;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        #LinkButton1:hover {
+            color: #836263;
         }
     </style>
 </head>
@@ -91,31 +107,17 @@
         <div>
             <asp:Label ID="welcomeLabel" runat="server" Text="Welcome to Our Website!"></asp:Label>
             <br />
-            <br />
             <label for="userName">UserName:</label>
-            <br />
-            <asp:TextBox ID="userName" runat="server"></asp:TextBox>
+            <asp:TextBox ID="userName" runat="server" placeholder="Enter your username"></asp:TextBox>
             <br />
             <label for="password">Password:</label>
-            <br />
-            <asp:TextBox ID="password" runat="server" TextMode="Password"></asp:TextBox>
-            <span id="eyeIcon" class="eye-icon" onclick="togglePassword()">🔒</span>
-            <script>
-                function togglePassword() {
-                    var passwordInput = document.getElementById('password');
-                    var eyeIcon = document.getElementById('eyeIcon');
-                    if (passwordInput.type === 'password') {
-                        passwordInput.type = 'text';
-                        eyeIcon.textContent = '👁️';
-                    } else {
-                        passwordInput.type = 'password';
-                        eyeIcon.textContent = '🔒';
-                    }
-                }
-            </script>
+            <div style="position: relative;">
+                <asp:TextBox ID="password" runat="server" TextMode="Password" placeholder="Enter your password"></asp:TextBox>
+                <span id="eyeIcon" class="eye-icon" onclick="togglePassword()">🔒</span>
+            </div>
             <br />
             <br />
-            <asp:DropDownList ID="list" runat="server" Width="250px">
+            <asp:DropDownList ID="list" runat="server" Width="100%">
                 <asp:ListItem Enabled="true" Text="Select Your Role" Value="-1"></asp:ListItem>
                 <asp:ListItem Text="Student" Value="1"></asp:ListItem>
                 <asp:ListItem Text="Advisor" Value="2"></asp:ListItem>
@@ -126,11 +128,24 @@
             <br />
             <asp:Button ID="login" runat="server" OnClick="Login" Text="Login" />
             <br />
-            <br />
             <asp:Label ID="goToRegister" runat="server" Text="Don't have an account yet?"></asp:Label>
             <asp:LinkButton ID="LinkButton1" OnClick="Register" runat="server">Register here</asp:LinkButton>
             <br />
         </div>
     </form>
+
+    <script>
+        function togglePassword() {
+            var passwordInput = document.getElementById('password');
+            var eyeIcon = document.getElementById('eyeIcon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.textContent = '👁️';
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.textContent = '🔒';
+            }
+        }
+    </script>
 </body>
 </html>

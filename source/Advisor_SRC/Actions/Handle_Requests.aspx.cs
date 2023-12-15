@@ -13,9 +13,17 @@ namespace source.Advisor_SRC.Actions
 {
     public partial class Handle_Requests : System.Web.UI.Page
     {
+        int advisorId;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session == null || Session["advisorID"] == null)
+            {
+                Response.Redirect("~/Error_Page.aspx");
+            }
+            else
+            {
+                advisorId = int.Parse(Session["advisorID"].ToString());
+            }
         }
 
 

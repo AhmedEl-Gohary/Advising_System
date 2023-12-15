@@ -306,7 +306,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".editorconfig" />
     <None Include="packages.config" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">

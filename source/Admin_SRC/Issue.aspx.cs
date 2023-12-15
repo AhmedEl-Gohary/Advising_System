@@ -20,10 +20,8 @@ namespace source.Admin_SRC
 
         protected void Enter(object sender, EventArgs e)
         {
-            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
-            SqlConnection conn = new SqlConnection(connstr);
-            int id;
-            try
+			int id;
+			try
             {
                 id = int.Parse(TextBox1.Text);
             }
@@ -32,23 +30,38 @@ namespace source.Admin_SRC
                 msg.Text = "You Should enter a Number!";
                 return;
             }
-            
-            SqlCommand isssue = new SqlCommand("Procedures_AdminIssueInstallment", conn);
-            isssue.CommandType = CommandType.StoredProcedure;
-            isssue.Parameters.Add(new SqlParameter("@payment_id", id));
-            conn.Open();
-            isssue.ExecuteNonQuery();
-            if (Existence_Check("Payment", "payment_id", id))
+			if (!Existence_Check("Payment", "payment_id", id))
+			{
+				msg.Text = "Invalid Payment ID";
+				msg.ForeColor = System.Drawing.Color.Red;
+                return;
+			}
+
+			string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+			using(SqlConnection conn = new SqlConnection(connstr))
             {
-                msg.Text = "Payment has been partitioned to Installments Successfully";
-                msg.ForeColor = System.Drawing.Color.Green;
-            }
-            else {
-                msg.Text = "Invalid Payment ID"; 
-                msg.ForeColor = System.Drawing.Color.Red; 
-            }
-            conn.Close();
-        }
+				conn.Open();
+                using (SqlCommand issue = new SqlCommand("Procedures_AdminIssueInstallment", conn))
+                {
+					issue.CommandType = CommandType.StoredProcedure;
+					issue.Parameters.Add(new SqlParameter("@payment_id", id));
+					try
+					{
+						issue.ExecuteNonQuery();
+					}
+					catch
+					{
+						msg.Text = "This paymen is already issued!";
+						msg.ForeColor = System.Drawing.Color.Red;
+						return;
+					}
+				}
+				conn.Close();
+			}
+
+			msg.Text = "Payment has been partitioned to Installments Successfully";
+			msg.ForeColor = System.Drawing.Color.Green;
+		}
         private bool Existence_Check<T>(string table, string column, T columnValue)
         {
             string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();

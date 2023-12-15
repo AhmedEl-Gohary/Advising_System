@@ -18,7 +18,7 @@ namespace source.Student_SRC.Courses
         {
             if (Session == null || Session["studentID"] == null)
             {
-                Response.Redirect("../../Error_Page.aspx");
+                Response.Redirect("~/Error_Page.aspx");
             }
             else
             {
@@ -125,6 +125,11 @@ namespace source.Student_SRC.Courses
             if (procName == "")
             {
                 msg.Text = "Please specify the type!";
+                return;
+            }
+            if(SemesterCode.Enabled && SemesterCode.Text == "")
+            {
+                msg.Text = "Please Enter Semester Code!";
                 return;
             }
             BindGridView(procName);

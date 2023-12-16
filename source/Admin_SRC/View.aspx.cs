@@ -31,7 +31,16 @@ namespace source.Admin_SRC
             if (type == "View")
             {
                 // For views
-                query = $"SELECT * FROM {name}";
+                if (name == "view_Students")
+                {
+                    query = $"SELECT student_id \'ID\' , f_name \'First Name\' , l_name \'Last Name\' ," +
+                        $"faculty \'Faculty\' , major \'Major\', semester \'Semester\'," +
+                        $" email \'Email\' from {name}";
+                }
+                else
+                {
+                    query = $"SELECT * FROM {name}";
+                }
             }
             else
             {

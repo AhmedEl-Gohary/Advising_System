@@ -79,7 +79,7 @@ namespace source.Student_SRC.Main
             string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = $"SELECT phone_number FROM Student_Phone WHERE student_id = {studentID}";
+                string query = $"SELECT phone_number as 'Phone Numbers' FROM Student_Phone WHERE student_id = {studentID}";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
                 DataTable dataTable = new DataTable();
                 connection.Open();

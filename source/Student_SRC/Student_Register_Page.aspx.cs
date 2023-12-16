@@ -52,12 +52,35 @@ namespace source.Student_SRC
             register.Parameters.AddWithValue("@major", majorName);
             register.Parameters.AddWithValue("@Semester", currSemester);
             SqlParameter studentID = register.Parameters.Add("@Student_id", SqlDbType.Int);
-            //TODO continue the login
             studentID.Direction = ParameterDirection.Output;
+            if (!Existence_Check<string>("Student","email", mail))
+            {
+                msg.Text = "This email already exists!";
+                return;
+            }
             conn.Open();
             register.ExecuteNonQuery();
             registerSuccesslabel.Text = "Registered Succesfully! Your ID is " + studentID.Value.ToString();
             conn.Close();
+        }
+
+        private bool Existence_Check<T>(string table, string column, T columnValue)
+        {
+            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string query = $"SELECT * from {table} WHERE {column} = \'{columnValue}\'";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                if (dataTable.Rows.Count == 0)
+                {
+                    return false;
+                }
+                conn.Close();
+            }
+            return true;
         }
     }
 }

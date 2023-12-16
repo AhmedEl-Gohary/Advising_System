@@ -39,7 +39,7 @@
             <asp:GridView ID="GridView1" runat="server">
             </asp:GridView>
             <br />
-            <asp:Label ID="msg" runat="server" Text=" "></asp:Label>
+            <asp:Label ID="msg" runat="server" Text=" " ForeColor ="Red"></asp:Label>
         </div>
     </form>
 </body>

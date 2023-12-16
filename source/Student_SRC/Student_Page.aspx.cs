@@ -63,7 +63,7 @@ namespace source.Student_SRC
                 case "View Exams":
                     Response.Redirect("Makeup_Exams/View.aspx");
                     break;
-                case "Registration":
+                case "Registeration":
                     Response.Redirect("Makeup_Exams/Register.aspx");
                     break;
                 case "Send Request":

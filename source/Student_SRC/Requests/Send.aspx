@@ -41,10 +41,17 @@
         background: linear-gradient(to right, #45a049, #4caf50);
     }
 
-    label {
+    #Select{
         color: #4b272d;
         font-size: 18px;
         font-weight: bold;
+        display: block;
+        margin-top: 15px;
+    }
+
+    #Label1, #Comment_Label{
+        color: #4b272d;
+        font-size: 20px;
         display: block;
         margin-top: 15px;
     }

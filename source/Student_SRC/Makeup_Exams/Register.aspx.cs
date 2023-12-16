@@ -16,6 +16,10 @@ namespace source.Student_SRC.Makeup_Exams
         int studentID = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (msg.Text != "Registered successfully!")
+            {
+                msg.ForeColor = System.Drawing.Color.Red;
+            }
             if (Session == null || Session["studentID"] == null)
             {
                 Response.Redirect("../../Error_Page.aspx");
@@ -42,18 +46,18 @@ namespace source.Student_SRC.Makeup_Exams
             }
             catch
             {
-                msg.Text = "not a Valid CourseID";
+                msg.Text = "CourseID must be a Number!";
                 return;
             }
 
             if(!Existence_Check <int> ("Course" , "course_id" , courseId))
             {
-                msg.Text = "not a Valid CourseID";
+                msg.Text = $"there is no course with ID = {courseId}";
                 return;
             }
             if (!Existence_Check <string> ("Semester" , "semester_code" , semestercode))
             {
-                msg.Text = "not a Valid SemesterCode";
+                msg.Text = $"there is no semester with ID = {semestercode}";
                 return;
             }
             int countPrev = Count_Rows("Exam_Student");
@@ -71,7 +75,16 @@ namespace source.Student_SRC.Makeup_Exams
 
                 try { proc.ExecuteNonQuery(); } catch (SqlException sqlException)
                 {
-                    msg.Text = "You have Already Regitered for an Exam before!";
+                    if (sqlException.Message ==
+                        "Cannot insert the value NULL into column 'exam_id', table 'Advising_System.dbo.Exam_Student'; column does not allow nulls. INSERT fails. The statement has been terminated.")
+                    {
+                        msg.Text = $"The Course with ID= {courseID} doesn't have a{type.ToLower()} makeup exam yet!";
+                    }
+                    else
+                    {
+                        msg.Text = "You have Already Regitered for an Exam before!";
+                    }
+
                     return;
                 }
                 conn.Close();
@@ -80,6 +93,7 @@ namespace source.Student_SRC.Makeup_Exams
             if(countAfter > countPrev)
             {
                 msg.Text = "Registered successfully!";
+                msg.ForeColor = System.Drawing.Color.Green;
             }
             else
             {

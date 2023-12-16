@@ -918,8 +918,8 @@ return 0
 select @status = financial_status from Student where student_id = @Student_id;
 
 select @pass = password from Student where Student.student_id = @Student_id 
-and (@status is null or @status = 0)
-if(@pass = @password)
+
+if(@pass = @password AND (@status = 1))
 set @success = 1 
 else 
 set @success = 0
@@ -1049,7 +1049,8 @@ If(exists(Select * from Student_Instructor_Course_take where Student_Instructor_
 = @courseID  and Student_Instructor_Course_take.exam_type = 'Normal' and (Student_Instructor_Course_take.grade in ('F','FF') or
 Student_Instructor_Course_take.grade is null)))
 begin 
-Select @exam_id = MakeUp_Exam.exam_id from MakeUp_Exam where MakeUp_Exam.course_id = @courseID
+Select @exam_id = MakeUp_Exam.exam_id from MakeUp_Exam where 
+MakeUp_Exam.course_id = @courseID AND MakeUp_Exam.type like '%First%'
 Select @instructor_id = Student_Instructor_Course_take.instructor_id from Student_Instructor_Course_take 
 where Student_Instructor_Course_take.student_id = @StudentID and Student_Instructor_Course_take.course_id = @courseID 
 insert into Exam_Student values (@exam_id, @StudentID, @courseID)
@@ -1141,7 +1142,8 @@ Print 'Your are not eligible to take 2nd makeup'
 
 else
 begin
-Select @exam_id = MakeUp_Exam.exam_id from MakeUp_Exam where MakeUp_Exam.course_id = @courseID
+Select @exam_id = MakeUp_Exam.exam_id from MakeUp_Exam where
+MakeUp_Exam.course_id = @courseID AND type like '%Second%'
 Select @instructor_id = Student_Instructor_Course_take.instructor_id from Student_Instructor_Course_take 
 where Student_Instructor_Course_take.student_id = @StudentID and Student_Instructor_Course_take.course_id = @courseID
 insert into Exam_Student values (@exam_id, @StudentID, @courseID)

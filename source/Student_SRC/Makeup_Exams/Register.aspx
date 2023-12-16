@@ -33,7 +33,7 @@
             <asp:Button ID="Button1" runat="server" Text="Register" OnClick="Button1_Click" />
             <br />
             <br />
-            <asp:Label ID="msg" runat="server" Text=" "></asp:Label>
+            <asp:Label ID="msg" runat="server" Text=" " ForeColor="Red"></asp:Label>
 
         </div>
     </form>

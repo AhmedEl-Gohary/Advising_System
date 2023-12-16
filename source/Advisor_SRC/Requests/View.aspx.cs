@@ -76,6 +76,11 @@ namespace source.Advisor_SRC.Requests
                 }
             }
         }
+
+        protected void GoBack(object sender, EventArgs e)
+        {
+            Response.Redirect("../Advisor_Page.aspx");
+        }
     }
 
 }

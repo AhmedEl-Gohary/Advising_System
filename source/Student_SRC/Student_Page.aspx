@@ -101,23 +101,40 @@
         }
 
         /* Matching styles for TreeView from the first file */
-        .tree-node a {
+        #treeContainer {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-left: 20px; /* Move the list slightly to the left */
+            margin-top: 20px; /* Move the list slightly down */
+        }
+
+        #List {
+            font-size: 24px; /* Enlarged */
+            color: #4b272d;
+            background-color: #f5f2f0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            width: 300px; /* Set the width as needed */
+        }
+
+        #List a {
             color: #4b272d;
             text-decoration: none;
             transition: color 0.3s ease;
             display: block;
-            padding: 15px;
+            padding: 15px; /* Increased padding for better visibility */
             margin: 10px 0;
             border-radius: 8px;
             transition: background-color 0.3s ease;
             position: relative;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif; /* Changed font family for description */
         }
 
-        .tree-node a:hover {
+        #List a:hover {
             color: #836263;
             background-color: #c4d7d2;
-            text-decoration: none;
         }
         
     </style>
@@ -125,7 +142,6 @@
 <body>
     <form id="form1" runat="server">
         <div id="container">
-            <div id="sidebar">
                 <asp:TreeView ID="List" runat="server" ImageSet="Arrows" OnSelectedNodeChanged="SelectedNodeChanged" CssClass="tree-node">
                     <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
                     <Nodes>
@@ -161,7 +177,6 @@
                 <asp:GridView ID="GridView1" runat="server" Width="100%" CssClass="grid-view">
                 </asp:GridView>
             </div>
-        </div>
     </form>
 </body>
 </html>

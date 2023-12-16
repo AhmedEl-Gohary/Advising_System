@@ -29,7 +29,7 @@ namespace source.Student_SRC
                 conn.Open();
                 string table = "Student";
                 string query = $"SELECT student_id as 'ID', f_name + ' ' + l_name as 'Full Name', GPA, email," +
-                    $" major, semester, acquired_hours as 'Acquired Hours', assigned_hours as 'Assigned Hours', " +
+                    $" major, semester , " +
                     $"advisor_id as 'Advisor ID' FROM {table} WHERE student_id = {studentId}";
                 SqlDataAdapter adapter = new SqlDataAdapter(query , conn);
                 DataTable dataTable = new DataTable();

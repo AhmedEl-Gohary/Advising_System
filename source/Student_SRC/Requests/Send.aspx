@@ -69,8 +69,8 @@
         color: #4b272d;
     }
 
-    #DropDownList1 {
-        width: 50%;
+     #DropDownList1{
+        width: 55%;
         padding: 15px;
         margin-top: 10px;
         border: 1px solid #ccc;
@@ -80,7 +80,7 @@
         box-sizing: border-box;
         font-size: 16px;
         color: #4b272d;
-    }
+     }
 
 
     #Send_Button {

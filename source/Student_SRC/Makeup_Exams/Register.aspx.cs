@@ -30,7 +30,7 @@ namespace source.Student_SRC.Makeup_Exams
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void Register_Click(object sender, EventArgs e)
         {
             int selectedValue = int.Parse(list.SelectedValue.ToString());
             if (-1 == selectedValue)
@@ -61,7 +61,6 @@ namespace source.Student_SRC.Makeup_Exams
                     " Semester Code must be of the form Character followed by the Year e.g W23";
                 return;
             }
-            int countPrev = Count_Rows("Exam_Student");
             string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
             using (SqlConnection conn = new SqlConnection(connstr))
             {
@@ -74,7 +73,20 @@ namespace source.Student_SRC.Makeup_Exams
                 proc.Parameters.AddWithValue("@courseID", courseId);
                 proc.Parameters.AddWithValue("@studentCurr_sem", semestercode);
 
-                try { proc.ExecuteNonQuery(); } catch (SqlException sqlException)
+                try { 
+                    int rowsAffecteed = proc.ExecuteNonQuery();
+                    if (rowsAffecteed > 0)
+                    {
+                        msg.Text = "Registered successfully!";
+                        msg.ForeColor = System.Drawing.Color.Green;
+                    }
+                    else
+                    {
+                        msg.Text = "You can't register for a Makeup Exam! it is either that you don't" +
+                            " take the course currently or you already succeeded!";
+                    }
+                } 
+                catch (SqlException sqlException)
                 {
                     if (sqlException.Message ==
                         "Cannot insert the value NULL into column 'exam_id', table 'Advising_System.dbo.Exam_Student'; column does not allow nulls. INSERT fails. The statement has been terminated.")
@@ -95,17 +107,7 @@ namespace source.Student_SRC.Makeup_Exams
                 }
                 conn.Close();
             }
-            int countAfter = Count_Rows("Exam_Student");
-            if(countAfter > countPrev)
-            {
-                msg.Text = "Registered successfully!";
-                msg.ForeColor = System.Drawing.Color.Green;
-            }
-            else
-            {
-                msg.Text = "You can't register for a Makeup Exam! it is either that you don't" +
-                    " take the course currently or you already succeeded!";
-            }
+            
         }
 
         private bool Existence_Check<T> (string table , string column ,  T columnValue) 
@@ -127,24 +129,8 @@ namespace source.Student_SRC.Makeup_Exams
             return true;
         }
 
-        private int Count_Rows (string table)
-        {
-            int count = 0;
-            string connstr = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
-            using (SqlConnection conn = new SqlConnection(connstr))
-            {
-                conn.Open();
-                string query = $"SELECT * from {table}";
-                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
-                DataTable dataTable = new DataTable();
-                adapter.Fill(dataTable);
-                count = dataTable.Rows.Count;
-                conn.Close();
-            }
-            return count;
-        }
 
-        protected void Button2_Click(object sender, EventArgs e)
+        protected void Go_Back_Click(object sender, EventArgs e)
         {
             Response.Redirect("../Student_Page.aspx");
         }

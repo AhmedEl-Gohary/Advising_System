@@ -24,13 +24,13 @@ namespace source.Student_SRC.Makeup_Exams
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Button2 control.
+        /// Go_Back control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button Go_Back;
 
         /// <summary>
         /// Label1 control.
@@ -87,13 +87,13 @@ namespace source.Student_SRC.Makeup_Exams
         protected global::System.Web.UI.WebControls.DropDownList list;
 
         /// <summary>
-        /// Button1 control.
+        /// register control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button register;
 
         /// <summary>
         /// msg control.

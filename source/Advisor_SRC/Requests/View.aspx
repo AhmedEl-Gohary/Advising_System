@@ -15,11 +15,10 @@
         }
 
         #form1 {
-            background: linear-gradient(to right, #ffffff, #f5f2f0);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: 1011px;
             text-align: center;
         }
 

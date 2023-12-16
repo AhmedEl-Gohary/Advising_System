@@ -23,12 +23,14 @@
         }
 
         #dashboardLabel {
-            color: #4b272d;
-            font-size: 36px; /* Enlarged */
-            font-weight: bold;
-            margin-bottom: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    color: #4b272d;
+    font-size: 35px;
+    font-weight: bold;
+    position: absolute;
+    top: 50px; 
+    left: 20px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
         #treeContainer {
             display: flex;

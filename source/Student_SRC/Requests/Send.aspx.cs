@@ -110,6 +110,8 @@ namespace source.Student_SRC.Requests
                 Set_Visible(true);
                 Label1.Text = (DropDownList1.SelectedValue == "1") 
                     ? "Credit Hours" : "Course ID";
+                TextBox1.Attributes["placeholder"] = (DropDownList1.SelectedValue == "1")
+                    ? "Enter Credit Hours" : "Enter Course ID";
                 string type = (DropDownList1.SelectedValue == "1")
                     ? "credit hours" : "course";
                 Load_Requests(type);

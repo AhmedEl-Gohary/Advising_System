@@ -40,9 +40,12 @@
 
         label {
             color: #4b272d;
-            font-size: 18px;
+            font-size: 14px;
             display: block;
             margin-top: 15px;
+            margin-left: 4px;
+            text-align: left;
+
         }
 
         #fname,
@@ -127,25 +130,25 @@
             <asp:Label ID="Label2" runat="server" Text="Please fill the required information"></asp:Label>
             <br />
             <br />
-            <label for="fname">First Name:</label>
+            <label for="fname">First Name</label>
             <asp:TextBox ID="fname" runat="server" Width="100%" placeholder="Enter your first name"></asp:TextBox>
             <br />
-            <label for="lname">Last Name:</label>
+            <label for="lname">Last Name</label>
             <asp:TextBox ID="lname" runat="server" Width="100%" placeholder="Enter your last name"></asp:TextBox>
             <br />
-            <label for="faculty">Faculty:</label>
+            <label for="faculty">Faculty</label>
             <asp:TextBox ID="faculty" runat="server" Width="100%" placeholder="Enter your faculty"></asp:TextBox>
             <br />
-            <label for="major">Major:</label>
+            <label for="major">Major</label>
             <asp:TextBox ID="major" runat="server" Width="100%" placeholder="Enter your major"></asp:TextBox>
             <br />
-            <label for="semester">Current Semester:</label>
+            <label for="semester">Current Semester</label>
             <asp:TextBox ID="semester" runat="server" placeholder="Enter your current semester"></asp:TextBox>
             <br />
-            <label for="email">Email:</label>
+            <label for="email">Email</label>
             <asp:TextBox ID="email" runat="server" TextMode="Email" placeholder="Enter your email"></asp:TextBox>
             <br />
-            <label for="password">Password:</label>
+            <label for="password">Password</label>
             <div style="position: relative;">
                 <asp:TextBox ID="password" runat="server" TextMode="Password" placeholder="Enter your password"></asp:TextBox>
                 <span id="eyeIcon" class="eye-icon" onclick="togglePassword()">🔒</span>

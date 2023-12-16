@@ -28,7 +28,7 @@ namespace source.Student_SRC.Grad_Plan
             {
                 conn.Open();
                 string table = $"dbo.FN_StudentViewGP({studentId})";
-                string query = $"SELECT * FROM {table}";
+                string query = $"SELECT Student_name , expected_grad_date , semester_code , course_id , name FROM {table}";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
@@ -40,6 +40,10 @@ namespace source.Student_SRC.Grad_Plan
                 }
                 conn.Close();
             }
+        }
+        protected void Go_Back_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Student_Page.aspx");
         }
     }
 }

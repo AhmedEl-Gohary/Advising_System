@@ -28,10 +28,10 @@ namespace source.Student_SRC.Financial
             using (SqlConnection conn = new SqlConnection(connstr))
             {
                 conn.Open();
-                string query = $"Select top 1 * from Installment inner join Payment" +
+                string query = $"Select top 1 Installment.* from Installment inner join Payment" +
                     $"  on Payment.payment_id = Installment.payment_id and " +
                     $"Payment.student_id = {studentId} and " +
-                    $"Installment.status=\'notpaid\'  " +
+                    $"Installment.status=\'notPaid\'  " +
                     $"where Installment.deadline > CURRENT_TIMESTAMP" +
                     $"  Order by Installment.deadline ASC";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, conn);

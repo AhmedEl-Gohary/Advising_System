@@ -32,5 +32,10 @@ namespace source.Student_SRC.Makeup_Exams
                 conn.Close();
             }
         }
+
+        protected void Go_Back_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Student_Page.aspx");
+        }
     }
 }

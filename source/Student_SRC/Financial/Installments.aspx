@@ -37,12 +37,35 @@
         padding: 30px;
         border-radius: 15px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        width: 400px;
+        width: 50%;
         text-align: center;
     }
 
     #GridView1 {
-        margin-top: 20px;
+        width: 70%;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: auto;
+        position:center;
+    }
+
+    #GridView1 th, #GridView1 td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    #GridView1 th {
+        background-color: #4caf50;
+        color: white;
+    }
+
+    #GridView1 tr:nth-child(even) {
+        background-color: #f5f5f5;
+    }
+
+    #GridView1 tr:hover {
+        background-color: #e0e0e0;
     }
 
     #Label1 {
@@ -57,6 +80,7 @@
 <body>
     <form id="form1" runat="server">
         <asp:Button ID="Go_Back" runat="server" Text="Go Back" OnClick="Go_Back_Click" />
+        <br />
         <br />
         <br />
         <asp:GridView ID="GridView1" runat="server">

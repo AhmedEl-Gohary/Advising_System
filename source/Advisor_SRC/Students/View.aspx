@@ -33,6 +33,7 @@
 
         #list {
             width: 100%;
+            max-width: 400px; /* Adjust the maximum width of the dropdown according to your needs */
             padding: 10px;
             margin-top: 10px;
             border: 1px solid #ccc;
@@ -42,10 +43,13 @@
             box-sizing: border-box;
             font-size: 16px;
             color: #4b272d;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #txtMajor {
             width: 100%;
+            max-width: 400px; /* Adjust the maximum width of the textbox according to your needs */
             padding: 15px;
             margin-top: 10px;
             border: 1px solid #ccc;
@@ -55,22 +59,26 @@
             box-sizing: border-box;
             font-size: 16px;
             color: #4b272d;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        #button {
-            background: linear-gradient(to right, #4caf50, #45a049);
+        #button, #goBackButton {
+             background: linear-gradient(to right, #4caf50, #45a049);
+            border-style: none;
+            border-color: inherit;
+            border-width: medium;
             color: white;
-            border: none;
             padding: 15px 0;
-            width: 100%;
             font-size: 18px;
             cursor: pointer;
             border-radius: 8px;
             transition: background-color 0.3s ease;
             margin-top: 20px;
+            margin-left: 0px;
         }
 
-        #button:hover {
+        #button:hover, #goBackButton:hover {
             background: linear-gradient(to right, #45a049, #4caf50);
         }
 
@@ -84,6 +92,9 @@
             margin-top: 20px;
             border-collapse: collapse;
             width: 100%;
+            max-width: 800px; /* Adjust the maximum width of the grid according to your needs */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #GridView1 th, #GridView1 td {
@@ -101,6 +112,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <h2>
+            
+            <asp:Button ID="goBackButton" runat="server" OnClick="GoBack" Text="Go Back" Width="224px" />
+
+            </h2>
             <h2>Students View</h2>
 
             <asp:DropDownList ID="list" runat="server" CssClass="list">
@@ -116,9 +132,16 @@
 
             <br />
 
-            <asp:Button ID="button" runat="server" CssClass="button" OnClick="OnButtonClick" Text="View Students" />
+            <asp:Button ID="button" runat="server" CssClass="button" OnClick="OnButtonClick" Text="View Students" Width="100%" />
+            
+            <br />
+            
             <br />
             <br />
+            
+            <br />
+            <br />
+
             <asp:Label ID="msg" runat="server" Text=" "></asp:Label>
 
             <asp:GridView ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">

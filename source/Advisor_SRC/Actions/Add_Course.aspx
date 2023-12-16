@@ -90,22 +90,22 @@
             color: #4b272d;
         }
 
-        #Button2 {
-            background: linear-gradient(to right, #4caf50, #45a049);
-            color: white;
-            border: none;
-            padding: 15px 0;
-            width: 25%;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
+        .goback-btn {
+          background: linear-gradient(to right, #4caf50, #45a049);
+  color: white;
+  border: none;
+  padding: 15px 0;
+  width: 25%;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
 
-        #Button2:hover {
-            background: linear-gradient(to right, #45a049, #4caf50);
-        }
+.goback-btn:hover {
+    background: linear-gradient(to right, #45a049, #4caf50);
+}
 
         .spacing {
             margin-bottom: 10px;
@@ -119,10 +119,11 @@
             margin-bottom: 10px;
         }
     </style>
-
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:Button ID="Button2" runat="server" OnClick="GoBack" Text="Go Back" CssClass="goback-btn" Width="150px" />
+        <br />
         <div class="spacing">
             <label for="itemType">Select Action:</label>
             <asp:DropDownList ID="itemType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="itemType_SelectedIndexChanged">
@@ -134,11 +135,12 @@
         </div>
 
         <div id="dynamicFields" class="dynamicFields" runat="server">
-
+            <!-- Your dynamic fields go here if applicable -->
         </div>
 
         <div class="spacing">
             <asp:Button ID="submitButton" runat="server" Text="Submit" OnClientClick="return submitForm();" OnClick="submitButton_Click" />
+            <br />
         </div>
 
         <br />

@@ -53,7 +53,7 @@ namespace source.Student_SRC
             register.Parameters.AddWithValue("@Semester", currSemester);
             SqlParameter studentID = register.Parameters.Add("@Student_id", SqlDbType.Int);
             studentID.Direction = ParameterDirection.Output;
-            if (!Existence_Check<string>("Student","email", mail))
+            if (Existence_Check<string>("Student","email", mail))
             {
                 msg.Text = "This email already exists!";
                 return;

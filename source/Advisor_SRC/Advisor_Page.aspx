@@ -48,8 +48,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
             padding: 20px;
-            width: 500px;
-        }
+            }
 
         #Tree a {
             color: #4b272d;
@@ -97,11 +96,12 @@
 <body>
     <form id="form1" runat="server">
         <div id="dashboardLabel">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="dashboardLabel" runat="server" Text="Dashboard"></asp:Label>
         </div>
 
         <div id="treeContainer">
-            <asp:TreeView ID="Tree" runat="server" ImageSet="Arrows" Width="500px" OnSelectedNodeChanged="SelectedNodeChanged">
+            <asp:TreeView ID="Tree" runat="server" ImageSet="Arrows" Width="379px" OnSelectedNodeChanged="SelectedNodeChanged">
                 <HoverNodeStyle Font-Underline="False" ForeColor="#5555DD" />
                 <Nodes>
                     <asp:TreeNode Text="My Students" Value="Students" Expanded="False" ToolTip="View and manage items. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>

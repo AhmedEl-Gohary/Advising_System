@@ -30,7 +30,7 @@ namespace source
             }
             catch
             {
-                msg.Text = "UserName Should be a Number!";
+                msg.Text = "UserName Should be Your ID Number!";
                 return;
             }
             string pass = password.Text;
@@ -51,7 +51,7 @@ namespace source
                 bool canLogin = canLogin = Boolean.Parse(FN_StudentLogin.ExecuteScalar().ToString());
                 if (!Existence_Check<int>("Student" , "student_id" , id))
                 {
-                    msg.Text = "There is no student with this userName!";
+                    msg.Text = "There is no Student with this userName!";
                     return;
                 }
                 if (canLogin)
@@ -71,6 +71,11 @@ namespace source
                 FN_AdvisorLogin.Parameters.AddWithValue("@advisor_Id", id);
                 FN_AdvisorLogin.Parameters.AddWithValue("@password", pass);
                 bool canLogin = Boolean.Parse(FN_AdvisorLogin.ExecuteScalar().ToString());
+                if (!Existence_Check<int>("Advisor", "advisor_id", id))
+                {
+                    msg.Text = "There is no Advisor with this userName!";
+                    return;
+                }
                 if (canLogin)
                 {
                     Session["advisorId"] = id;
@@ -78,19 +83,24 @@ namespace source
                 }
                 else
                 {
-                    msg.Text = "Invalid ID/Password";
+                    msg.Text = "Invalid Password";
                 }
             }
             // admin
             else
             {
-                if (id == adminuserid && pass == adminpass)
+                if (id != adminuserid)
+                {
+                    msg.Text = "There is no Admin with this userName!";
+                    return;
+                }
+                if (pass == adminpass)
                 {
                     Response.Redirect("Admin_SRC/Admin_Page.aspx");
                 }
                 else
                 {
-                    msg.Text = "Invalid ID/Password";
+                    msg.Text = "Invalid Password";
                 }
             }
             conn.Close();

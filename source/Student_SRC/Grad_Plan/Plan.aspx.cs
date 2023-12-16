@@ -41,5 +41,9 @@ namespace source.Student_SRC.Grad_Plan
                 conn.Close();
             }
         }
+        protected void Go_Back_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Student_Page.aspx");
+        }
     }
 }

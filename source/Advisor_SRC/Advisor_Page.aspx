@@ -27,9 +27,11 @@
 
         #dashboardLabel {
             color: #4b272d;
-            font-size: 36px;
+            font-size: 35px;
             font-weight: bold;
-            margin-bottom: 20px;
+            position: absolute;
+            top: 50px; 
+            left: 20px; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -37,9 +39,11 @@
             display: flex;
             align-items: flex-start;
             justify-content: flex-start;
-            margin-left: 20px;
-            margin-top: 20px;
+            margin-left: 0;  
+            margin-top: 0;
+            offset-position: left;
         }
+
 
         #Tree {
             font-size: 24px;
@@ -48,7 +52,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
             padding: 20px;
-            }
+        }
 
         #Tree a {
             color: #4b272d;
@@ -69,7 +73,6 @@
             text-decoration: none;
         }
 
-        /* Updated */
         #Tree a:hover::after {
             content: attr(title);
             position: fixed;
@@ -83,10 +86,9 @@
             width: 350px;
             font-size: 18px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            white-space: pre-line; /* Display text in multiple rows */
+            white-space: pre-line; 
         }
 
-        /* Updated: Remove underline */
         #Tree a:hover {
             text-decoration: none;
         }
@@ -96,17 +98,17 @@
 <body>
     <form id="form1" runat="server">
         <div id="dashboardLabel">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
             <asp:Label ID="dashboardLabel" runat="server" Text="Dashboard"></asp:Label>
         </div>
 
         <div id="treeContainer">
-            <asp:TreeView ID="Tree" runat="server" ImageSet="Arrows" Width="379px" OnSelectedNodeChanged="SelectedNodeChanged">
+            <asp:TreeView ID="Tree" runat="server" ImageSet="Arrows" Width="500px" OnSelectedNodeChanged="SelectedNodeChanged">
                 <HoverNodeStyle Font-Underline="False" ForeColor="#5555DD" />
                 <Nodes>
-                    <asp:TreeNode Text="My Students" Value="Students" Expanded="False" ToolTip="View and manage items. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>
-                    <asp:TreeNode Text="View Requests" Value="View Requests" Expanded="False" ToolTip="View and manage items. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>
-                    <asp:TreeNode Text="Courses/GradPlan" Value="Actions" Expanded="False" ToolTip="View and manage items. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>
+                    <asp:TreeNode Text="My Students" Value="Students" Expanded="False" ToolTip="View your assigned students. You have the option to view all your assigned students or view students from a certain major along with the courses thay take."></asp:TreeNode>
+                    <asp:TreeNode Text="View Requests" Value="View Requests" Expanded="False" ToolTip="View your requests. You have the option to view all your requests or just view the pending ones."></asp:TreeNode>
+                    <asp:TreeNode Text="Courses/GradPlan" Value="Actions" Expanded="False" ToolTip="Here you will find actions regarding courses and graduation plans. You have the option."></asp:TreeNode>
                     <asp:TreeNode Text="Handle Requests" Value="Handle Requests" ToolTip="View and manage items. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>
                 </Nodes>
                 <NodeStyle Font-Names="Segoe UI, Tahoma, Geneva, Verdana, sans-serif" Font-Size="24px" ForeColor="#4b272d" HorizontalPadding="20px" NodeSpacing="0px" VerticalPadding="20px" />

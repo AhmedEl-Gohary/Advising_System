@@ -21,7 +21,8 @@
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            max-width: 800px; /* Adjust the maximum width according to your needs */
+            width: 100%;
             text-align: center;
         }
 
@@ -31,7 +32,7 @@
         }
 
         #list {
-            width: 250px;
+            width: 100%;
             padding: 10px;
             margin-top: 10px;
             border: 1px solid #ccc;

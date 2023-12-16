@@ -96,6 +96,7 @@ namespace source
                 }
                 if (pass == adminpass)
                 {
+                    Session["adminID"] = id;
                     Response.Redirect("Admin_SRC/Admin_Page.aspx");
                 }
                 else

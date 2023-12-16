@@ -6,8 +6,8 @@
 <head runat="server">
     <title>Login Page</title>
     <style>
-body {
-    display: flex;
+        body {
+            display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
@@ -25,7 +25,7 @@ body {
             text-align: center;
         }
    
-     #welcomeLabel {
+        #welcomeLabel {
             color: #4b272d;
             font-size: 32px;
             font-weight: normal;
@@ -41,7 +41,7 @@ body {
         #welcomeLabel:hover {
             transform: scale(1.1);
         }
-  label {
+        label {
             color: #4b272d;
             font-size: 18px;
             font-weight: bold;

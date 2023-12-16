@@ -106,10 +106,10 @@
             <asp:TreeView ID="Tree" runat="server" ImageSet="Arrows" Width="500px" OnSelectedNodeChanged="SelectedNodeChanged">
                 <HoverNodeStyle Font-Underline="False" ForeColor="#5555DD" />
                 <Nodes>
-                    <asp:TreeNode Text="My Students" Value="Students" Expanded="False" ToolTip="View your assigned students. You have the option to view all your assigned students or view students from a certain major along with the courses thay take."></asp:TreeNode>
-                    <asp:TreeNode Text="View Requests" Value="View Requests" Expanded="False" ToolTip="View your requests. You have the option to view all your requests or just view the pending ones."></asp:TreeNode>
-                    <asp:TreeNode Text="Courses/GradPlan" Value="Actions" Expanded="False" ToolTip="Here you will find actions regarding courses and graduation plans. You have the option."></asp:TreeNode>
-                    <asp:TreeNode Text="Handle Requests" Value="Handle Requests" ToolTip="View and manage items. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>
+                    <asp:TreeNode Text="My Students" Value="Students" Expanded="False" ToolTip="Here you can view your assigned students. You have the option to view all your assigned studentsm You also have the option to view students from a certain major along with the courses they take."></asp:TreeNode>
+                    <asp:TreeNode Text="View Requests" Value="View Requests" Expanded="False" ToolTip="Here you can view your assigned requests. You have the option to view all your requests or you can just view the pending ones."></asp:TreeNode>
+                    <asp:TreeNode Text="Courses/GradPlan" Value="Actions" Expanded="False" ToolTip="Here you will find actions regarding courses and graduation plans. You have the option to add a graduation plan to a student that doesn't have a plan yet, or to update the expected graduation date in an existing graduation plan. You can also add a course to an existing graduation plan."></asp:TreeNode>
+                    <asp:TreeNode Text="Handle Requests" Value="Handle Requests" ToolTip="Here you can handle your assigned requests. You can handle both types of reuquests, extra credit hours requests and course requests."></asp:TreeNode>
                 </Nodes>
                 <NodeStyle Font-Names="Segoe UI, Tahoma, Geneva, Verdana, sans-serif" Font-Size="24px" ForeColor="#4b272d" HorizontalPadding="20px" NodeSpacing="0px" VerticalPadding="20px" />
                 <ParentNodeStyle Font-Bold="False" />

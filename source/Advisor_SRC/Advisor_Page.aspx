@@ -76,15 +76,15 @@
         #Tree a:hover::after {
             content: attr(title);
             position: fixed;
-            top: 60%;
-            right: 12%;
+            top: -25%;
+            right: -150%;
             transform: translate(0, 39%);
             padding: 35px;
             background-color: #f5f2f0;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 350px;
-            font-size: 18px;
+            font-size: 30px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             white-space: pre-line; 
         }

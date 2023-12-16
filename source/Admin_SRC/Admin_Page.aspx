@@ -68,22 +68,21 @@
             background-color: #c4d7d2;
         }
 
-        /* Updated */
-        #TreeView1 a:hover::after {
-            content: attr(title);
-            position: fixed;
-            top: 60%; /* Adjusted the position down */
-            right: 12%;
-            transform: translate(0, 39%);
-            padding: 35px; /* Increased padding for better visibility */
-            background-color: #f5f2f0;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 350px; /* Adjust as needed */
-            font-size: 18px; /* Enlarged font size */
-            font-family:  'Great Vibes', cursive; /* Changed font family for description */
-            white-space: pre-line; /* Added to display multiple lines */
-        }
+      #TreeView1 a:hover::after {
+    content: attr(title);
+    position: fixed;
+    top: 15%;
+    right: 12%;
+    transform: translate(0, 39%);
+    padding: 35px;
+    background-color: #f5f2f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    font-size: 40px;
+    font-family: 'Great Vibes', cursive;
+    white-space: pre-line;
+}
     </style>
 </head>
 

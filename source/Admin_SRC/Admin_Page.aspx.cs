@@ -11,7 +11,15 @@ namespace source.Admin_SRC
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            int adminID;
+            if (Session == null || Session["adminID"] == null)
+            {
+                Response.Redirect("~/Error_Page.aspx");
+            }
+            else
+            {
+                adminID = int.Parse(Session["adminID"].ToString());
+            }
         }
     }
 }

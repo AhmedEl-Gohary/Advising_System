@@ -24,7 +24,6 @@ namespace source.Student_SRC.Main
                 studentID = int.Parse(Session["studentID"].ToString());
             }
             Load_Contacts();
-            Phone.Text = "";
         }
 
         protected void Add_Click(object sender, EventArgs e)
@@ -61,11 +60,13 @@ namespace source.Student_SRC.Main
                         msg.Text = "Please Enter Valid Phone Number!";
                         return;
                     }
+                    msg.Text = ex.Message;
                     return;
                 }
             }
             msg.Text = "Phone Number Added Successfully!";
             Load_Contacts();
+            Phone.Text = "";
         }
 
         protected void Go_Back_Click(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace source.Student_SRC.Main
             string connectionString = WebConfigurationManager.ConnectionStrings["Advising_System"].ToString();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = $"SELECT phone_number FROM Student_Phone WHERE student_id = {studentID}";
+                string query = $"SELECT phone_number as 'Phone Numbers' FROM Student_Phone WHERE student_id = {studentID}";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
                 DataTable dataTable = new DataTable();
                 connection.Open();

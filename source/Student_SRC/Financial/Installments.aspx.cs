@@ -15,6 +15,7 @@ namespace source.Student_SRC.Financial
         protected void Page_Load(object sender, EventArgs e)
         {
             int studentId = 0;
+            Label1.Text = " ";
             if (Session == null || Session["studentID"] == null)
             {
                 Response.Redirect("../../Error_Page.aspx");
@@ -29,7 +30,7 @@ namespace source.Student_SRC.Financial
                 conn.Open();
                 string query = $"Select top 1 * from Installment inner join Payment" +
                     $"  on Payment.payment_id = Installment.payment_id and " +
-                    $"Payment.student_id = @student_ID and " +
+                    $"Payment.student_id = {studentId} and " +
                     $"Installment.status=\'notpaid\'  " +
                     $"where Installment.deadline > CURRENT_TIMESTAMP" +
                     $"  Order by Installment.deadline ASC";
@@ -38,8 +39,17 @@ namespace source.Student_SRC.Financial
                 adapter.Fill(dataTable);
                 GridView1.DataSource = dataTable;
                 GridView1.DataBind();
+                if(dataTable.Rows.Count == 0)
+                {
+                    Label1.Text = "You don't have any installments yet!";
+                }
                 conn.Close();
             }
+        }
+
+        protected void Go_Back_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Student_Page.aspx");
         }
     }
 }

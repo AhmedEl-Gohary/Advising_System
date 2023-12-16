@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="View.aspx.cs" Inherits="source.Advisor_SRC.Students.View" %>
 
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -119,7 +121,7 @@
             </h2>
             <h2>Students View</h2>
 
-            <asp:DropDownList ID="list" runat="server" CssClass="list">
+            <asp:DropDownList ID="list" runat="server" CssClass="list" OnSelectedIndexChanged = "list_SelectedIndexChanged" AutoPostBack="True">
                 <asp:ListItem Enabled="true" Text="choose a listing option" Value="-1"></asp:ListItem>
                 <asp:ListItem Text="Assigned Students" Value="1"></asp:ListItem>
                 <asp:ListItem Text="Assigned Students In a Major" Value="2"></asp:ListItem>

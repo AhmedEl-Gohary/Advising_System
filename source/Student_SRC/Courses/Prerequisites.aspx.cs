@@ -31,5 +31,11 @@ namespace source.Student_SRC.Courses
                 }
             }
         }
+
+        protected void Go_Back_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Student_Page.aspx");
+        }
+
     }
 }

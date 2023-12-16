@@ -192,7 +192,9 @@ namespace source.Admin_SRC
 					command.Parameters.AddWithValue("@slot_id", slotID);
 					try
 					{
-						command.ExecuteNonQuery();
+						int affectedRows = command.ExecuteNonQuery();
+						if (affectedRows == 0)
+							throw new InvalidDataException();
 					}
 					catch
 					{
@@ -220,7 +222,9 @@ namespace source.Admin_SRC
 					command.Parameters.AddWithValue("@advisorID", advisorID);
 					try
 					{
-						command.ExecuteNonQuery();
+						int affectedRows = command.ExecuteNonQuery();
+						if (affectedRows == 0)
+							throw new InvalidDataException();
 					}
 					catch
 					{
@@ -249,7 +253,9 @@ namespace source.Admin_SRC
 					command.Parameters.AddWithValue("@semester_code",semesterCode );
 					try
 					{
-						command.ExecuteNonQuery();
+						int affectedRows = command.ExecuteNonQuery();
+						if (affectedRows == 0)
+							throw new InvalidDataException();
 					}
 					catch
 					{

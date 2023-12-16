@@ -146,7 +146,7 @@
                         </asp:TreeNode>
                         <asp:TreeNode Expanded="False" SelectAction="Expand" Text="Makeup Exams" Value="New Node">
                             <asp:TreeNode Text="View Exams" Value="View Exams"></asp:TreeNode>
-                            <asp:TreeNode Text="Registration" Value="Registration"></asp:TreeNode>
+                            <asp:TreeNode Text="Registeration" Value="Registeration"></asp:TreeNode>
                         </asp:TreeNode>
                         <asp:TreeNode Expanded="False" SelectAction="Expand" Text="Requests" Value="New Node">
                             <asp:TreeNode Text="Send Request" Value="Send Request"></asp:TreeNode>

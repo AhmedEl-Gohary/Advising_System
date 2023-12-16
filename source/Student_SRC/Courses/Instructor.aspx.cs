@@ -35,6 +35,11 @@ namespace source.Student_SRC.Courses
                 return;
             }
             string currSemCode = semCode.Text.ToString();
+            if (!Existence_Check<string>("Semester", "semester_code", currSemCode))
+            {
+                msg.Text = $"there is no semester with ID = {currSemCode}";
+                return;
+            }
 
             DataTable dataTable = new DataTable();
             GridView1.DataSource = dataTable;
@@ -52,7 +57,14 @@ namespace source.Student_SRC.Courses
                 proc.Parameters.AddWithValue("@instrucorID",instructorID);
                 proc.Parameters.AddWithValue("@CourseID",courseID);
                 proc.Parameters.AddWithValue("@current_semester_code", currSemCode);
-                proc.ExecuteNonQuery();
+                int noRowsAffected = proc.ExecuteNonQuery();
+                if (noRowsAffected == 0)
+                {
+                    msg.Text = "You can't choose this instructor for this course! " +
+                        "it is either that the instructor doesn't teach this course in this semester " +
+                        "or You don't take this course in this semester!";
+                    return;
+                }
                 conn.Close();
             }
         }

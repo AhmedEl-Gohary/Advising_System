@@ -129,7 +129,8 @@ namespace source.Student_SRC.Courses
             }
             if(SemesterCodeText.Visible && !Existence_Check<string>("Semester", "semester_code", SemesterCodeText.Text))
             {
-                msg.Text = "Please Enter Valid Semester Code!";
+                msg.Text = "Please Enter Valid Semester Code!" +
+                    " Semester Code must be of the form Character followed by the Year e.g W23";
                 return;
             }
             BindGridView(procName);

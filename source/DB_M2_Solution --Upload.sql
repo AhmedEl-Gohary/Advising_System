@@ -1138,7 +1138,7 @@ declare
 @exam_id int,
 @instructor_id int
 if dbo.FN_StudentCheckSMEligibility(@StudentID, @courseID) = 0
-Print 'Your are not eligible to take 2nd makeup'
+throw 51000 ,  'Your are not eligible to take 2nd makeup' , 1
 
 else
 begin

@@ -27,8 +27,12 @@ namespace source.Student_SRC.Financial
             using (SqlConnection conn = new SqlConnection(connstr))
             {
                 conn.Open();
-                string table = $"dbo.FN_StudentUpcoming_installment({studentId})";
-                string query = $"SELECT {table} AS \"Next Deadline\"";
+                string query = $"Select top 1 * from Installment inner join Payment" +
+                    $"  on Payment.payment_id = Installment.payment_id and " +
+                    $"Payment.student_id = @student_ID and " +
+                    $"Installment.status=\'notpaid\'  " +
+                    $"where Installment.deadline > CURRENT_TIMESTAMP" +
+                    $"  Order by Installment.deadline ASC";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);

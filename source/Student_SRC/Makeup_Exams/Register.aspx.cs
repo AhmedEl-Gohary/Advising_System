@@ -57,7 +57,8 @@ namespace source.Student_SRC.Makeup_Exams
             }
             if (!Existence_Check <string> ("Semester" , "semester_code" , semestercode))
             {
-                msg.Text = $"there is no semester with ID = {semestercode}";
+                msg.Text = $"there is no semester with code = {semestercode}" +
+                    " Semester Code must be of the form Character followed by the Year e.g W23";
                 return;
             }
             int countPrev = Count_Rows("Exam_Student");
@@ -80,9 +81,14 @@ namespace source.Student_SRC.Makeup_Exams
                     {
                         msg.Text = $"The Course with ID= {courseID} doesn't have a{type.ToLower()} makeup exam yet!";
                     }
+                    else if (sqlException.Message ==
+                        "Your are not eligible to take 2nd makeup")
+                    {
+                        msg.Text = sqlException.Message;
+                    }
                     else
                     {
-                        msg.Text = "You have Already Regitered for an Exam before!";
+                        msg.Text = "You have Already Regitered for a makeup exam for this course before!";
                     }
 
                     return;

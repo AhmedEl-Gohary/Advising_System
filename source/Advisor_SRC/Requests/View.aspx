@@ -43,18 +43,35 @@
 
         #button {
             background: linear-gradient(to right, #4caf50, #45a049);
-            color: white;
-            border: none;
-            padding: 15px 0;
-            width: 100%;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
+ color: white;
+ border: none;
+ padding: 15px 0;
+ width: 100%;
+ font-size: 18px;
+ cursor: pointer;
+ border-radius: 8px;
+ transition: background-color 0.3s ease;
+ margin-top: 20px;
         }
 
         #button:hover {
+            background: linear-gradient(to right, #45a049, #4caf50);
+        }
+
+        #goBackButton {
+            background: linear-gradient(to right, #4caf50, #45a049);
+ color: white;
+ border: none;
+ padding: 15px 0;
+ width: 100%;
+ font-size: 18px;
+ cursor: pointer;
+ border-radius: 8px;
+ transition: background-color 0.3s ease;
+ margin-top: 20px;
+        }
+
+        #goBackButton:hover {
             background: linear-gradient(to right, #45a049, #4caf50);
         }
 
@@ -85,6 +102,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <h2>
+
+            <asp:Button ID="goBackButton" runat="server" OnClick="GoBack" Text="Go Back" Width="150px" />
+
+            </h2>
             <h2>Advisor Requests</h2>
 
             <asp:DropDownList ID="dropDownList" runat="server" CssClass="dropDownList">
@@ -99,6 +121,9 @@
             <br />
 
             <asp:Label ID="msg" runat="server" ForeColor="Red" Text=""></asp:Label>
+
+            <br />
+            <br />
 
             <br />
             <br />

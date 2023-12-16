@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Web.UI;
+using System.Xml.Linq;
 
 
 namespace source.Advisor_SRC.Students
@@ -53,7 +54,9 @@ namespace source.Advisor_SRC.Students
 
             if (selectedValue == "1")
             {
-                query = $"SELECT * FROM Student WHERE advisor_id = {advisorID}";
+                query = $"SELECT student_id \'ID\' , f_name \'First Name\' , l_name \'Last Name\' ," +
+                        $"faculty \'Faculty\' , major \'Major\', semester \'Semester\'," +
+                        $" email \'Email\' from Student WHERE advisor_id = {advisorID}";
             }
             else if (selectedValue == "2")
             {
@@ -65,7 +68,7 @@ namespace source.Advisor_SRC.Students
                     msg.Text = "You must enter a major";
                     return;
                 }
-
+                
                 query = "EXEC Procedures_AdvisorViewAssignedStudents @AdvisorID, @major";
             }
 
@@ -107,6 +110,12 @@ namespace source.Advisor_SRC.Students
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        protected void GoBack(object sender, EventArgs e)
+        {
+            Response.Redirect("../Advisor_Page.aspx");
 
         }
     }

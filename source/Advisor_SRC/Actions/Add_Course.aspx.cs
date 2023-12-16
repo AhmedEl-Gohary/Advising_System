@@ -325,6 +325,10 @@ namespace source.Advisor_SRC.Actions
             }
             return true;
         }
+        protected void GoBack(object sender, EventArgs e)
+        {
+            Response.Redirect("../Advisor_Page.aspx");
+        }
     }
 
 

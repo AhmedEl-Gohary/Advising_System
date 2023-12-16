@@ -24,6 +24,15 @@ namespace source.Advisor_SRC.Requests
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// goBackButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button goBackButton;
+
+        /// <summary>
         /// dropDownList control.
         /// </summary>
         /// <remarks>

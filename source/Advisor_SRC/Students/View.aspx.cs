@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Web.UI;
 
+
 namespace source.Advisor_SRC.Students
 {
     public partial class View : System.Web.UI.Page
@@ -43,7 +44,7 @@ namespace source.Advisor_SRC.Students
             if (selectedValue == "-1")
             {
                 msg.ForeColor = System.Drawing.Color.Red;
-                msg.Text = "You must choose a listing option";
+                msg.Text = "You must choose an option";
                 return;
             }
 
@@ -86,7 +87,7 @@ namespace source.Advisor_SRC.Students
                     if(dataTable.Rows.Count == 0)
                     {
                         string suffix = (selectedValue == "2" ? $" in major: {major}" : " ");
-                        msg.Text = $"You don't any assigned Students{suffix}!";
+                        msg.Text = $"You don't have any assigned Students{suffix}!";
                     }
                 }
             }

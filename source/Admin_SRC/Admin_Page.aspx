@@ -95,12 +95,12 @@
         <div id="treeContainer">
             <asp:TreeView ID="TreeView1" runat="server">
                 <Nodes>
-                    <asp:TreeNode Text="List Items" NavigateUrl="~/Admin_SRC/View.aspx" Value="Views" ToolTip="View and manage items. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>
-                    <asp:TreeNode Text="Add Items" NavigateUrl="~/Admin_SRC/Add.aspx" Value="Add Items" ToolTip="Add new items. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>
-                    <asp:TreeNode Text="Delete Items" NavigateUrl="~/Admin_SRC/Delete.aspx" Value="Delete Items" ToolTip="Delete existing items. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>
-                    <asp:TreeNode Text="Link" NavigateUrl="~/Admin_SRC/Link.aspx" Value="Link" ToolTip="Manage links. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>
-                    <asp:TreeNode Text="Issue Installments" NavigateUrl="~/Admin_SRC/Issue.aspx" Value="Issue Installments" ToolTip="Manage installment issues. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>
-                    <asp:TreeNode Text="Update Financial Status" NavigateUrl="~/Admin_SRC/Update.aspx" Value="Update Financial Status" ToolTip="Update financial information. This is a longer description to showcase the updated styling. It contains multiple lines."></asp:TreeNode>
+                    <asp:TreeNode Text="List Items" NavigateUrl="~/Admin_SRC/View.aspx" Value="Views" ToolTip="Here you have the option to view information about the system including active students, requests, advisors and much more."></asp:TreeNode>
+                    <asp:TreeNode Text="Add Items" NavigateUrl="~/Admin_SRC/Add.aspx" Value="Add Items" ToolTip="Here you have the option to add new items into the system such as new semesters, new courses and new makeup exams."></asp:TreeNode>
+                    <asp:TreeNode Text="Delete Items" NavigateUrl="~/Admin_SRC/Delete.aspx" Value="Delete Items" ToolTip="Here you have the option to delete existing items in the system such as courses and slots."></asp:TreeNode>
+                    <asp:TreeNode Text="Link" NavigateUrl="~/Admin_SRC/Link.aspx" Value="Link" ToolTip="Here you can link existing entities in the system. For you example you can link students with advisors and courses with instructors."></asp:TreeNode>
+                    <asp:TreeNode Text="Issue Installments" NavigateUrl="~/Admin_SRC/Issue.aspx" Value="Issue Installments" ToolTip="In this page you have the ability to partition a payment into multiple installments to be added to the respective student."></asp:TreeNode>
+                    <asp:TreeNode Text="Update Financial Status" NavigateUrl="~/Admin_SRC/Update.aspx" Value="Update Financial Status" ToolTip="In this page you have the ability to update the financial status of students."></asp:TreeNode>
                 </Nodes>
             </asp:TreeView>
         </div>

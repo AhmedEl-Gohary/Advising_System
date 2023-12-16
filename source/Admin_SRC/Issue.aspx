@@ -52,7 +52,7 @@
             color: white;
             border: none;
             padding: 15px 0;
-            width: 100%;
+            width: 25%;
             font-size: 18px;
             cursor: pointer;
             border-radius: 8px;
@@ -78,7 +78,7 @@
         <br />
         <label for="TextBox1">Payment_ID:</label>
         <asp:TextBox ID="TextBox1" runat="server" placeholder="Enter Payment ID"></asp:TextBox>
-        <asp:Button ID="Button1" runat="server" OnClick="Enter" Text="Enter" Width="110px" />
+        <asp:Button ID="Button1" runat="server" OnClick="Enter" Text="Enter" Width="100%" />
         <br />
         <br />
         <asp:Label ID="msg" runat="server" Text=" " ForeColor="Red"></asp:Label>

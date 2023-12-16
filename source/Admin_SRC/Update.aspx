@@ -47,7 +47,7 @@
             color: #4b272d;
         }
 
-        #Button1, #Button2 {
+        #Button1 {
             background: linear-gradient(to right, #4caf50, #45a049);
             color: white;
             border: none;
@@ -59,6 +59,18 @@
             transition: background-color 0.3s ease;
             margin-top: 20px; /* Adjusted margin for better spacing */
         }
+     #Button2 {
+     background: linear-gradient(to right, #4caf50, #45a049);
+     color: white;
+     border: none;
+     padding: 15px 0;
+     width:25%;
+     font-size: 18px;
+     cursor: pointer;
+     border-radius: 8px;
+     transition: background-color 0.3s ease;
+     margin-top: 20px; /* Adjusted margin for better spacing */
+ }
 
         #Button1:hover, #Button2:hover {
             background: linear-gradient(to right, #45a049, #4caf50);
@@ -78,7 +90,7 @@
         <br />
         <label for="TextBox1">Student_ID:</label>
         <asp:TextBox ID="TextBox1" runat="server" placeholder="Enter Student ID"></asp:TextBox>
-        <asp:Button ID="Button1" runat="server" OnClick="Enter" Text="Update" Width="110px" />
+        <asp:Button ID="Button1" runat="server" OnClick="Enter" Text="Update"  />
         <br />
         <br />
         <asp:Label ID="msg" runat="server" Text=" " ForeColor="Red"></asp:Label>

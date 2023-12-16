@@ -30,7 +30,7 @@
             color: white;
             border: none;
             padding: 15px 0;
-            width: 100%;
+            width: 25%;
             font-size: 18px;
             cursor: pointer;
             border-radius: 8px;

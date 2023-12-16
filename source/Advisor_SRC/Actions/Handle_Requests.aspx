@@ -91,11 +91,12 @@
         }
 
         #Button2 {
-            background: linear-gradient(to right, #4caf50, #45a049);
+                      background: linear-gradient(to right, #4caf50, #45a049);
+            border-style: none;
+            border-color: inherit;
+            border-width: medium;
             color: white;
-            border: none;
             padding: 15px 0;
-            width: 25%;
             font-size: 18px;
             cursor: pointer;
             border-radius: 8px;
@@ -137,6 +138,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <br />
+        <asp:Button ID="Button2" runat="server" OnClick="GoBack" Text="Go Back" CssClass="goback-btn" Width="150px" />
+        <br />
         <div class="spacing">
             <label for="itemType">Select Action:</label>
             <asp:DropDownList ID="itemType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="itemType_SelectedIndexChanged">
@@ -152,6 +156,8 @@
 
         <div class="spacing">
             <asp:Button ID="submitButton" runat="server" Text="Submit" OnClientClick="return submitForm();" OnClick="submitButton_Click" />
+            <br />
+            <br />
         </div>
 
         <br />

@@ -24,7 +24,6 @@ namespace source.Advisor_SRC
             {
                 advisorID = int.Parse(Session["advisorID"].ToString());
             }
-            string tmp = "hello";
         }
 
         protected void SelectedNodeChanged(object sender, EventArgs e)

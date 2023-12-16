@@ -8,10 +8,27 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             align-items: stretch;
+            justify-content: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
             background: linear-gradient(to right, #e7e1dc, #d1c4bb);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #form1 {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        #dashboardLabel {
+            color: #4b272d;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -20,8 +37,8 @@
         }
 
         #sidebar {
-            width: 200px;
-            background: linear-gradient(to right, #ffffff, #f5f2f0);
+            width: 250px; /* Adjusted width */
+            background: linear-gradient(to right, #e0e8e4, #c4d7d2); /* Similar background color */
             padding: 20px;
             border-right: 1px solid #ddd;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -55,7 +72,7 @@
         }
 
         .tree-node:hover {
-            background-color: #e0e0e0;
+            background-color: #c4d7d2; /* Adjusted hover background color */
         }
 
         #GridView1 {
@@ -82,6 +99,27 @@
         #GridView1 tr:hover {
             background-color: #e0e0e0;
         }
+
+        /* Matching styles for TreeView from the first file */
+        .tree-node a {
+            color: #4b272d;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .tree-node a:hover {
+            color: #836263;
+            background-color: #c4d7d2;
+            text-decoration: none;
+        }
+        
     </style>
 </head>
 <body>

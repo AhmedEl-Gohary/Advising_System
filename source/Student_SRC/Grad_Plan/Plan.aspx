@@ -6,51 +6,74 @@
 <head runat="server">
     <title></title>
         <style>
-    body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        margin: 0;
-        background: linear-gradient(to right, #e7e1dc, #d1c4bb);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(to right, #e7e1dc, #d1c4bb);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    #Go_Back {
-        background: linear-gradient(to right, #4caf50, #45a049);
-        color: white;
-        border: none;
-        padding: 15px 0;
-        width: 100%;
-        font-size: 18px;
-        cursor: pointer;
-        border-radius: 8px;
-        transition: background-color 0.3s ease;
-    }
+        #Go_Back {
+            background: linear-gradient(to right, #4caf50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 0;
+            width: 100%;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
 
-    #Go_Back:hover {
-        background: linear-gradient(to right, #45a049, #4caf50);
-    }
+        #Go_Back:hover {
+            background: linear-gradient(to right, #45a049, #4caf50);
+        }
 
-    #form1 {
-        background: linear-gradient(to right, #ffffff, #f5f2f0);
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        width: 63%;
-        text-align: center;
-    }
+        #form1 {
+            background: linear-gradient(to right, #ffffff, #f5f2f0);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 63%;
+            text-align: center;
+        }
 
-    #GridView1 {
-        margin-top: 20px;
-    }
+        #GridView1 {
+            width: 70%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            position:center;
+        }
 
-    #Label1 {
-        color: #4b272d;
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
+        #GridView1 th, #GridView1 td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        #GridView1 th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        #GridView1 tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        #GridView1 tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        #Label1 {
+            color: #4b272d;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
 </style>
 </head>
